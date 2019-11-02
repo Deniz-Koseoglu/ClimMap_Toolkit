@@ -76,7 +76,6 @@ Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage exampl
 The function returns NULL and as it serves only to download user-requested files.
 
 <br/><br/>
-
 ### The `clim_summary` function
 #### Description
 Extracts data from downloaded NetCDF4 or HDF files, with or without further calculations (mean, SD, summed/aggregated climatologies, and/or anomalies).
