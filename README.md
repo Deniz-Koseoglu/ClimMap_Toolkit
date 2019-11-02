@@ -291,14 +291,18 @@ Derives the slope (absolute or percentage) of a least-squares trend from timeser
 
 #### Usage
 ```r
-
+clim_trend <- function(data, trend_vars, trend_unit="default", add_stats = TRUE, coord_vars = c("Longitude", "Latitude"), time_span)
 ```
 
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **arg** |desc|
-| **arg** |desc|
+| **data** |An R object containing the input data (e.g. from `clim_summary`).|
+| **trend_vars** |A character vector of column names to use for least-squares regression.|
+| **trend_unit**|The format to use for calculated least-squares slopes. The default value leaves the slope unaltered; `"decade"` multiplies the slope by 10, providing a decadal trend assuming input data is yearly; `"%"` normalises the slope to the mean value; `"% decade"` additionally multiplies the slope by 10, yielding a decadal trend of relative change.|
+| **add_stats**|A TRUE/FALSE logical determining whether standard error and *p*-value are calculated for each regression (TRUE by default; switch to FALSE to considerably hasten function execution).|
+| **coord_vars**|A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
+| **time_span** |A character vector of length 2 designed to contain the first and last year of input data coverage, which are added to column names for the user's convenience. Otherwise, can take any value.|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
@@ -312,14 +316,13 @@ Converts dates within filenames from a yyyy-mm-dd to a yyyy-day_of_year format f
 
 #### Usage
 ```r
-
+clim_ndate <- function(file_path)
 ```
 
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **arg** |desc|
-| **arg** |desc|
+| **file_path** |A character vector containing the directory path. Filenames where a date in the yyyy-mm-dd format is found will be renamed (e.g. 20020701 changes to 2002182).|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
@@ -333,14 +336,18 @@ A helper function that merges all .csv files from a given directory by column(s)
 
 #### Usage
 ```r
-
+multMerge <- function(mypath, use_dt=TRUE, patt="\\.csv$", which.files="all", by_cols=FALSE, which.cols=NULL)
 ```
 
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **arg** |desc|
-| **arg** |desc|
+| **mypath** |A character vector denoting the filepath of files to be merged.|
+| **use_dt** |A TRUE/FALSE logical. When TRUE (default), the `data.table` package is used for significantly quicker merging of large files.|
+| **patt** |A `grep` pattern to filter the files by name within the target directory. The default value ensures only .csv files are merged.|
+| **arg**| A numeric vector of file IDs (assigned based on their order within `mypath`). Used to further filter the files to be merged. The default value, "all", merges all files detected in `mypath` using `patt`.|
+| **by_cols**| A character vector of column names to use for merging. By default, merging is carried out by columns common to all detected files. |
+| **which.cols**| A character vector of column names to keep in the final output. Defaults to NULL, keeping all columns.|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
