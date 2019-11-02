@@ -8,7 +8,7 @@ The toolkit includes various functions for downloading, processing (e.g. aggrega
 
 The toolkit was previously used to calculate a temporally-averaged climatology, as well as a spatially-averaged daily time series of chlorophyll-a (and a record of its percentage change) in the Barents Sea. Chlorophyll values were also determined at point locations where surface sediments were collected. The results are presented in:
 
-Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings - HBI T25", *Quaternary Science Reviews* ***523***, article 115703.
+Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings - HBI T<sub>25</sub>", *Quaternary Science Reviews* ***523***, article 115703.
 
 The toolkit is provided as-is under the terms of the MIT licence (see LICENCE.md in the repository root).
 
