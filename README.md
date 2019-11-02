@@ -53,6 +53,7 @@ You are now ready to use the functions.
 5. Note that although the "ClimMap_Toolkit_v09.R" file does not have to be opened directly in R (or RStudio), it contains the source code which can be examined and altered by the user where required.
 
 
+
 # Functions
 ### The `clim_download` function
 #### Description
