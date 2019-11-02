@@ -6,10 +6,14 @@ The toolkit includes various functions for downloading, processing (e.g. aggrega
 4. [All](https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php) climate variables from [TerraClimate](http://www.climatologylab.org/terraclimate.html).
 5. Contemporary [Climate Research Unit Time Series (CRU TS) v4.03](https://crudata.uea.ac.uk/cru/data/hrg/) [data](https://catalogue.ceda.ac.uk/uuid/10d3e3640f004c578403419aac167d82).
 
+The toolkit was previously used to calculate a temporally-averaged climatology, as well as a spatially-averaged daily time series of chlorophyll-a (and a record of its percentage change) in the Barents Sea. Chlorophyll values were also determined at point locations where surface sediments were collected. The results are presented in:
 
+Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings - HBI T25", *Quaternary Science Reviews* ***523***, article 115703.
+
+The toolkit is provided as-is under the terms of the MIT licence (see LICENCE.md in the repository root).
 
 # Functionality
-The ClimMap Toolkit contains the following functions as of version 0.9 (02/11/2019):
+The ClimMap Toolkit contains the following functions as of v0.9 (02/11/2019):
 1. `clim_download`
 2. `clim_summary`
 3. `clim_ndate`
