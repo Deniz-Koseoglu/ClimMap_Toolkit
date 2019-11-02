@@ -53,7 +53,6 @@ You are now ready to use the functions.
 5. Note that although the "ClimMap_Toolkit_v09.R" file does not have to be opened directly in R (or RStudio), it contains the source code which can be examined and altered by the user where required.
 
 
-
 # Functions
 ### The `clim_download` function
 #### Description
@@ -76,6 +75,7 @@ Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage exampl
 #### Values
 The function returns NULL and as it serves only to download user-requested files.
 
+<br/><br/>
 
 ### The `clim_summary` function
 #### Description
