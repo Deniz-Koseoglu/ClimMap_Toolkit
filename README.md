@@ -20,7 +20,7 @@ The toolkit is provided as-is under the terms of the MIT licence (see LICENCE.md
 The ClimMap Toolkit contains the following functions as of v0.9 (02/11/2019):
 1. `clim_download` automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables.
 2. `clim_summary` extracts data from downloaded NetCDF4 or HDF files, with or without further calculations (mean, SD, summed/aggregated climatologies, and/or anomalies).
-3. `clim_plot` visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function in a Work In Progress (WIP).
+3. `clim_plot` visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function is a Work In Progress (WIP).
 4. `clim_region` spatially aggregates extracted/summarised data from any .csv via ESRI shapefiles.
 5. `clim_locate` determines values of extracted/summarised data at any number of point locations.
 6. `clim_cphyto` calculates phytoplankton biomass from particulate backscattering coefficient (b<sub>bp</sub>) data according to linear calibrations of [Behrenfeld et al., (2005)](https://doi.org/10.1029/2004GB002299), [Graff et al. (2016)](https://doi.org/10.3354/meps11539), or any custom linear regression function.
@@ -95,3 +95,256 @@ Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage exampl
 
 #### Values
 The function returns a list containing the `data.frame` of extracted/summarised climatology and/or yearly data (`$yearly_summary`), monthly data (`$monthly_summary`; optional), more visually interpretable/formatted column names (`$clim_pretty_names` and `$clim_pretty_names_monthly`; optional) map projection information (`$projection_info`), and — depending on the type of data processed — a `data.frame` of grid coordinates only (`$coords_total`).
+<br/><br/>
+### The `clim_plot` function
+#### Description
+Visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function is a Work In Progress (WIP).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns
+<br/><br/>
+### The `clim_region` function
+#### Description
+Spatially aggregates extracted/summarised data from any .csv (e.g. that created by `clim_summary`) via ESRI shapefiles.
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_locate` function
+#### Description
+Determines values of extracted/summarised data at any number of point locations (only WGS84-projected Latitude/Longitude coordinates are supported at present).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_cphyto` function
+#### Description
+Calculates phytoplankton biomass from particulate backscattering coefficient (b<sub>bp</sub>) data according to linear calibrations of [Behrenfeld et al., (2005)](https://doi.org/10.1029/2004GB002299), [Graff et al. (2016)](https://doi.org/10.3354/meps11539), or any custom linear regression function.
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_day` function
+#### Description
+Calculates theoretical day length as a function of latitude and day of year according to [Kirk et al., 2010](https://doi.org/10.1017/CBO9781139168212) and based on the C implementation [here](http://orca.science.oregonstate.edu/faq01.php).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_divrate` function
+#### Description
+Models phytoplankton division/growth rates according to [Behrenfeld et al., 2005](https://doi.org/10.1029/2004GB002299) and/or [Behrenfeld et al. (2016](https://doi.org/10.1038/NCLIMATE2838), [2017](https://doi.org/10.1038/NGEO2861)).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_btrack` function
+#### Description
+Calculates a record of relative change from a time series (e.g. daily/8-daily chlorophyll concentration or phytoplankton biomass) using various methods ([Behrenfeld et al., 2017](https://doi.org/10.1038/NGEO2861); [McKibben et al., 2012](https://doi.org/10.1029/2012JC008114)).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_bloom` function
+#### Description
+Detects bloom start/end dates, duration ([Hopkins et al., 2015](https://doi.org/10.1002/2014GB004919)), intensity, magnitude ([Friedland et al., 2018](https://doi.org/10.1111/geb.12717)), and relative contribution to the summed timeseries. Works best with daily chlorophyll concentration timeseries characterised by a pronounced spring bloom peak (e.g. in the Barents Sea and other Arctic shelf areas).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_melt` function
+#### Description
+Calculates Inner and Outer Melt Season Length (MSL) from the melt season [NOAA data](https://neptune.gsfc.nasa.gov/uploads/files/melt_update_2019.zip), as outlined by [Stroeve et al., 2014](https://doi.org/10.1002/2013GL058951).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_trend` function
+#### Description
+Derives the slope (absolute or percentage) of a least-squares trend from timeseries data (e.g. interannual or daily Sea Ice Concentration, SIC) and calculates the significance (*p*-value) of linear regression.
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `clim_ndate` function
+#### Description
+Converts dates within filenames from a yyyy-mm-dd to a yyyy-day_of_year format for compatibility with `clim_summary`.
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
+### The `multMerge` function
+#### Description
+A helper function that merges all .csv files from a given directory by column(s).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns 
+<br/><br/>
