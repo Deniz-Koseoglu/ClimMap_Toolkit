@@ -6,6 +6,8 @@ The toolkit includes various functions for downloading, processing (e.g. aggrega
 4. [All](https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php) climate variables from [TerraClimate](http://www.climatologylab.org/terraclimate.html).
 5. Contemporary [Climate Research Unit Time Series (CRU TS) v4.03](https://crudata.uea.ac.uk/cru/data/hrg/) [data](https://catalogue.ceda.ac.uk/uuid/10d3e3640f004c578403419aac167d82).
 
+Please send any suggestions for inclusion of future datasets to [deniz.koseoglu@plymouth.ac.uk](mailto: deniz.koseoglu@plymouth.ac.uk).
+
 The toolkit was previously used to calculate a temporally-averaged climatology, as well as a spatially-averaged daily time series of chlorophyll-a (and a record of its percentage change) in the Barents Sea. Chlorophyll concentrations were also determined at point locations where surface sediments were collected in preparation for allomerative hierarchical clustering (AHC) and dimensionality reduction (via PCA). The results are published in:
 
 Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings — HBI T<sub>25</sub>", *Quaternary Science Reviews* **523**, 115703.
@@ -18,7 +20,7 @@ The toolkit is provided as-is under the terms of the MIT licence (see LICENCE.md
 The ClimMap Toolkit contains the following functions as of v0.9 (02/11/2019):
 1. `clim_download` automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables.
 2. `clim_summary` extracts data from downloaded NetCDF4 or HDF files, with or without further calculations (mean, SD, summed/aggregated climatologies, and/or anomalies).
-3. `clim_plot` visualises the data created with `clim_summary` (or that from any suitable .csv file).
+3. `clim_plot` visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function in a Work In Progress (WIP).
 4. `clim_region` spatially aggregates extracted/summarised data from any .csv via ESRI shapefiles.
 5. `clim_locate` determines values of extracted/summarised data at any number of point locations.
 6. `clim_cphyto` calculates phytoplankton biomass from particulate backscattering coefficient (b<sub>bp</sub>) data according to linear calibrations of [Behrenfeld et al., (2005)](https://doi.org/10.1029/2004GB002299), [Graff et al. (2016)](https://doi.org/10.3354/meps11539), or any custom linear regression function.
@@ -49,3 +51,48 @@ source("D:/Climate Data/ClimMap_Toolkit_v09.R")
 You are now ready to use the functions.
 
 5. Note that although the "ClimMap_Toolkit_v09.R" file does not have to be opened directly in R (or RStudio), it contains the source code which can be examined and altered by the user where required.
+
+
+# Functions
+### The `clim_download` function
+#### Description
+Automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables.
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns NULL and as it serves only to download user-requested files.
+
+
+### The `clim_summary` function
+#### Description
+Extracts data from downloaded NetCDF4 or HDF files, with or without further calculations (mean, SD, summed/aggregated climatologies, and/or anomalies).
+
+#### Usage
+```r
+
+```
+
+#### Arguments
+| Argument | Description |
+| ------------- |-------------|
+| **arg** |desc|
+| **arg** |desc|
+
+#### Details
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+
+#### Values
+The function returns a list containing the `data.frame` of extracted/summarised climatology and/or yearly data (`$yearly_summary`), monthly data (`$monthly_summary`; optional), more visually interpretable/formatted column names (`$clim_pretty_names` and `$clim_pretty_names_monthly`; optional) map projection information (`$projection_info`), and — depending on the type of data processed — a `data.frame` of grid coordinates only (`$coords_total`).
