@@ -6,7 +6,7 @@ The toolkit includes various functions for downloading, processing (e.g. aggrega
 4. [All](https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php) climate variables from [TerraClimate](http://www.climatologylab.org/terraclimate.html).
 5. Contemporary [Climate Research Unit Time Series (CRU TS) v4.03](https://crudata.uea.ac.uk/cru/data/hrg/) [data](https://catalogue.ceda.ac.uk/uuid/10d3e3640f004c578403419aac167d82).
 
-Please send any suggestions for inclusion of future datasets to [deniz.koseoglu@plymouth.ac.uk](mailto: deniz.koseoglu@plymouth.ac.uk).
+Please send any suggestions for inclusion of future datasets to deniz.koseoglu@plymouth.ac.uk.
 
 The toolkit was previously used to calculate a temporally-averaged climatology, as well as a spatially-averaged daily time series of chlorophyll-a (and a record of its percentage change) in the Barents Sea. Chlorophyll concentrations were also determined at point locations where surface sediments were collected in preparation for allomerative hierarchical clustering (AHC) and dimensionality reduction (via PCA). The results are published in:
 
@@ -115,7 +115,7 @@ Visualises the data created with `clim_summary` (or that from any suitable .csv 
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns
+The function returns two lists containing `ggplot2` objects with maps of satellite data and (optionally) point/sample data.
 <br/><br/>
 ### The `clim_region` function
 #### Description
@@ -136,7 +136,7 @@ Spatially aggregates extracted/summarised data from any .csv (e.g. that created 
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A list containing a `data.frame` with spatially-averaged data and `ggplot2` plots as specified by the user.
 <br/><br/>
 ### The `clim_locate` function
 #### Description
@@ -157,7 +157,7 @@ Determines values of extracted/summarised data at any number of point locations 
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` of input coordinates and associated variable values (e.g. chlorophyll concentration) determined by the function. 
 <br/><br/>
 ### The `clim_cphyto` function
 #### Description
@@ -178,7 +178,7 @@ Calculates phytoplankton biomass from particulate backscattering coefficient (b<
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` including original input data and phytoplankton biomass (C<sub>phyto</sub>; g C m<sup>-3</sup>) as determined by the function.
 <br/><br/>
 ### The `clim_day` function
 #### Description
@@ -199,7 +199,7 @@ Calculates theoretical day length as a function of latitude and day of year acco
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` with input data and calculated day length (in hours). 
 <br/><br/>
 ### The `clim_divrate` function
 #### Description
@@ -220,7 +220,7 @@ Models phytoplankton division/growth rates according to [Behrenfeld et al., 2005
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A list of `data.frame` objects containing input data and division/growth rates (d<sup>-1</sup>) calculated via the chosen algorithm(s).
 <br/><br/>
 ### The `clim_btrack` function
 #### Description
@@ -241,7 +241,7 @@ Calculates a record of relative change from a time series (e.g. daily/8-daily ch
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` with timeseries of relative change of the input variable (e.g. in chlorophyll concentration) and additional calculations as specified by the user (e.g. maximum/minimum/mean/median/duration of positive and negative change).
 <br/><br/>
 ### The `clim_bloom` function
 #### Description
@@ -262,7 +262,7 @@ Detects bloom start/end dates, duration ([Hopkins et al., 2015](https://doi.org/
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+Returns a `data.frame` containing original input data and calculated bloom descriptors (see **Arguments**).
 <br/><br/>
 ### The `clim_melt` function
 #### Description
@@ -283,7 +283,7 @@ Calculates Inner and Outer Melt Season Length (MSL) from the melt season [NOAA d
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` with input MSL data and calculated Inner MSL ("Inmelt") and Outer MSL ("Outmelt"), in days. 
 <br/><br/>
 ### The `clim_trend` function
 #### Description
@@ -304,7 +304,7 @@ Derives the slope (absolute or percentage) of a least-squares trend from timeser
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` with input data and calculated slope (absolute or percentage change per year/decade as specified by the user), *p*-value, and standard error (optional).
 <br/><br/>
 ### The `clim_ndate` function
 #### Description
@@ -325,7 +325,7 @@ Converts dates within filenames from a yyyy-mm-dd to a yyyy-day_of_year format f
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+Returns NULL. The files within the specified directory are renamed.
 <br/><br/>
 ### The `multMerge` function
 #### Description
@@ -346,5 +346,5 @@ A helper function that merges all .csv files from a given directory by column(s)
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
 
 #### Values
-The function returns 
+A `data.frame` containing columns from all files merged (e.g. by latitude/longitude coordinates). 
 <br/><br/>
