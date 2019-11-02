@@ -74,7 +74,6 @@ Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage exampl
 
 #### Values
 The function returns NULL and as it serves only to download user-requested files.
-
 <br/><br/>
 ### The `clim_summary` function
 #### Description
