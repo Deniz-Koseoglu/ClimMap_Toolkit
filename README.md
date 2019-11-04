@@ -90,7 +90,7 @@ clim_download <- function(repository="NSIDC", hemisphere="north", frequency="mon
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions;
-`clim_download` downloads data to a specified "Data" folder located in the "Climate Data" directory of ClimMap Toolkit. Every repository, variable, and data resolution have a dedicated folder. For example, when ClimMap Toolkit is located at **"D:/Climate Data/"** if the user downloads **monthly northern-hemisphere SIC** data from **NSIDC**, the resulting netCDF files will appear in: **D:/Climate Data/Data/NSIDC/Data/SIC/nh_monthly/**.
+`clim_download` downloads data to a specified "Data" folder located in the "Climate Data" directory of ClimMap Toolkit. Every repository, variable, and data resolution have a dedicated folder. For example, when ClimMap Toolkit is located at **"D:/Climate Data/"** and the user downloads **monthly northern-hemisphere SIC** data from **NSIDC**, the resulting netCDF files will appear in: **D:/Climate Data/Data/NSIDC/Data/SIC/nh_monthly/**.
 
 #### Values
 The function returns NULL as it serves only to download user-requested files.
