@@ -11,7 +11,7 @@ The toolkit includes various functions for downloading, processing (e.g. aggrega
 5. [All](https://climate.northwestknowledge.net/TERRACLIMATE/index_directDownloads.php) climate variables from [TerraClimate](http://www.climatologylab.org/terraclimate.html).
 6. Contemporary [Climate Research Unit Time Series (CRU TS) v4.03](https://crudata.uea.ac.uk/cru/data/hrg/) [data](https://catalogue.ceda.ac.uk/uuid/10d3e3640f004c578403419aac167d82).
 
-Please send any suggestions for inclusion of future datasets to deniz.koseoglu@plymouth.ac.uk.
+Please send any suggestions for inclusion of future datasets, bug fixes, and any other queries to deniz.koseoglu@plymouth.ac.uk.
 
 The toolkit was previously used to calculate a temporally-averaged climatology, as well as a spatially-averaged daily time series of chlorophyll-a (and a record of its percentage change) in the Barents Sea. Chlorophyll concentrations were also determined at point locations where surface sediments were collected in preparation for agglomerative hierarchical clustering (AHC) and dimensionality reduction (via PCA). The results are published in:
 
