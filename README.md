@@ -389,8 +389,8 @@ clim_btrack <- function(data, sat_vars, coord_vars=c("xcoord", "ycoord", "Longit
 | **year_val** |**Currently not utilised.**|
 | **monthly_aggr** |A TRUE/FALSE logical. Should relative change be averaged by month? Defaults to `TRUE`.|
 | **export_path** |Character value denoting the directory to which function output is exported.|
-| **smoothing** |If numeric, applies LOESS smoothing to the data as a pre-processing step and denotes the span value used. If `NA` (default), no smoothing is applied.|
-| **extras** |A TRUE/FALSE logical. If `TRUE` (default), calculates additional parameters from the relative change record, including: maximum and minimum value above 0 (Pos_MAX and Pos_MIN), mean and median value above 0 (Pos_MEAN and Pos_MEDIAN), duration (in number of data points) of values above 0 and their percentage from the total (Pos_DUR and Pos_Dur%); most of these parameters, with the exception of maximum value, are also calculated for values below 0 (Neg_MIN, Neg_MEAN, Neg_MEDIAN, Neg_DUR, Neg_Dur%). Finally, sample size of non-missing values is also calculated (SSize). Parameters calculated from non-smoothed data have the prefix "RAW", while a second set of parameters with the prefix "LOESS" is additionally calculated from LOESS-smoothed data when `smoothing` is numeric.|
+| **smoothing** |If numeric between 0 and 1, applies LOESS smoothing to the data as a pre-processing step and denotes the span value used. If `NA` (default), no smoothing is applied.|
+| **extras** |A TRUE/FALSE logical. If `TRUE` (default), calculates additional parameters from the relative change record, including: maximum and minimum value above 0 (Pos_MAX and Pos_MIN), mean and median value above 0 (Pos_MEAN and Pos_MEDIAN), duration (in number of data points) of values above 0 and their percentage from the total (Pos_DUR and Pos_Dur%); most of these parameters, with the exception of maximum value, are also calculated for values below 0 (Neg_MIN, Neg_MEAN, Neg_MEDIAN, Neg_DUR, Neg_Dur%). Finally, sample size of non-missing values is also calculated (SSize). Parameters calculated from non-smoothed data have the prefix "RAW", while a second set of parameters with the prefix "LOESS" is additionally calculated from LOESS-smoothed data when `smoothing` is `numeric`.|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
@@ -412,15 +412,15 @@ clim_bloom <- function(data, coord_vars=c("Longitude", "Latitude"), consec_num=2
 | ------------- |-------------|
 | **data** |Character filepath or R `data.frame` containing time series of data (e.g. daily-resolution chlorophyll concentration) from which to derive bloom descriptors.|
 | **coord_vars** |A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
-| **consec_num** |The number of consecutive data points below the set threshold required to identify bloom start and end dates (see [Hopkins et al., 2015](https://doi.org/10.1002/2014GB004919)).|
-| **thres_percent** |desc|
-| **thres_num** |desc|
-| **grep_patt** |desc|
-| **varlab** |desc|
-| **export_path** |desc|
-| **bloom_dur** |desc|
-| **smoothing** |desc|
-| **smooth_max** |desc|
+| **consec_num** |The number of consecutive data points (2 by default) below the set threshold, required to identify bloom start and end dates (see [Hopkins et al., 2015](https://doi.org/10.1002/2014GB004919)).|
+| **thres_percent** |A numeric value between 0 and 1 that denotes the fraction of the difference between maximum and minimum input values (e.g. chlorophyll) which is used to determine the bloom start/end threshold as per [Hopkins et al. (2015)](https://doi.org/10.1002/2014GB004919). Defaults to 0.05.|
+| **thres_num** |A numeric value equal to either 1 or 2. If **1**, a single minimum value-based threshold (dependent on `thres_percent`) is calculated from the entire time series of input data, and used to determine both bloom start and end dates. If **2** (default), two separate thresholds are calculated before the time series maximum (used to determine bloom start time), and after (used to determine bloom termination/end) as per [Hopkins et al. (2015)](https://doi.org/10.1002/2014GB004919).|
+| **grep_patt** |A `grep` pattern used to extract times (**day of year**) from column names. The default value works for column names of data extracted via `clim_summary`.|
+| **varlab** |The label used to identify the satellite data variable (e.g. chlorophyll) from which bloom descriptors are calculated. Defaults to "chlor_a".|
+| **export_path** |Character value denoting the directory to which function output is exported.|
+| **bloom_dur** |A TRUE/FALSE logical. Should bloom duration be calculated? `TRUE` by default.|
+| **smoothing** |If numeric between 0 and 1, applies LOESS smoothing to the data as a pre-processing step and denotes the span value used. If `NA` (default), no smoothing is applied.|
+| **smooth_max** |If numeric between 0 and 1, additionally calculates the input time series maximum (and its time of occurrence) using a "smoothed" approach. For example, assuming input `data` is chlorophyll concentration and `smooth_max=0.03` (default), the number of **consecutive** points within 3% of (and including) the chlorophyll maximum is determined, and the first (i.e. earliest) such point is used as the peak bloom value; `smooth_max` is useful for noisy data, where the absolute maximum chlorophyll concentration does not necessarily represent the beginning of a bloom.|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
