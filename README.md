@@ -107,26 +107,26 @@ clim_summary <- function(remove_miss="all", frequency="daily", repository="NSIDC
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **repository** |desc|
-| **hemisphere** |desc|
-| **frequency** |desc|
-| **data_type** |desc|
-| **nc_path** |desc|
-| **year_rng** |desc|
-| **month_rng** |desc|
-| **day_rng** |desc|
-| **var_names** |desc|
-| **coord_subset** |desc|
-| **subset_order** |desc|
-| **summary_func** |desc|
-| **export_path** |desc|
-| **big_data** |desc|
-| **good_names** |desc|
-| **calc_anom** |desc|
-| **calc_sum** |desc|
-| **n_limit** |desc|
-| **mode** |desc|
-| **remove_miss** |Should missing values be removed? **This argument is not currently used**, and values marked as missing in the original data are always removed.|
+| **repository** |Which repository to process files from? One of: "NSIDC", "MODIS_A", "SeaWifs", "SeaWifs_MODISA" (when using the shared folder; see `shared_folder` in `clim_download`), "CEDA_MO" (HadUK-Grid), "CRU4" (CRU TS v4.03), or "TClim" (TerraClimate).|
+| **hemisphere** |One of: "north" or "south". Only relevant when `repository="NSIDC"`.|
+| **frequency** |One of: "daily" (when `repository` is "NSIDC", "MODIS_A", "SeaWifs", or "SeaWifs_MODISA"), "monthly", "mon-20y", "mon-30y" (when `repository` is "TClim" or "CEDA_MO").|
+| **data_type** |Character denoting the variable to be processed. Available options are analogous to those of the `data_type` argument for `clim_download`.|
+| **nc_path** |Character. The filepath to the directory containing netCDF files.|
+| **year_rng** |A numeric vector of years for which to process data. When `frequency="mon-30y"`, must be of length 2 and in the format `c(earliest year, latest year)`.|
+| **month_rng** |A numeric vector between 1 and 12, or character vector (any of "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec") denoting months for which to process data. A value of "all" processes every month of available data included in `year_rng`.|
+| **day_rng** |A numeric vector of days (between 1 and 365) for which to process data. Works only when `repository` is one of: "NSIDC", "MODIS_A", "SeaWifs", or "SeaWifs_MODISA", and `frequency="daily"`.|
+| **var_names** |Character (or vector) of variable names as provided in netCDF/HDF files to be processed. When "default", attempts to identify these automatically.|
+| **coord_subset** |A numeric vector of length 4 providing spatial coordinate limits of output files in the format `c(minimum latitude, maximum latitude, minimum longitude, maximum longitude)`.|
+| **subset_order** |A character vector of length 3. Describes the temporal identifiers (elements 1 and 2) and their separator (element 3) within filenames of imported files. For example, if filenames contain year and month with no separator (e.g. "200207" for July of 2002), `subset_order` should take the form `c("year", "month", "")` (default); if days are used instead of months (e.g. "2002182" for July 1st, 2002), this would change to `c("year", "day", "")`.|
+| **summary_func** |One of "total", "yearly", or "yearly_monthly"; "total" calculates the multi-annual average climatology (mean, sd, optionally the sum) from all imported data (e.g. if `month_rng=4:6` and `year_rng=1988:2018`, the climatology encompassing April-June of 1988-2018 will be calculated; "yearly" carries out all the calculations of "total", but includes yearly values as well (e.g. mean and sd for every year from 1988 to 2018); "yearly_monthly" additionally retrieves data for each month separately, but is less time-efficient and currently works only when `frequency="monthly"`.|
+| **export_path** |Character value denoting the directory to which function output is exported.|
+| **big_data** |A vector of length 4. Determines the strategy for processing the often large satellite datasets under RAM and CPU constraints. The **first element** determines the directory path where data is exported when available RAM falls below a set threshold, given in MegaBytes as the **second element**. The **third element** determines the number of rows used for processing extracted data in chunks. The **fourth element** specifies the number of CPU threads to use. For example, when `big_data=c("D:/", 7000, 140000, 3)`, data is flushed to the "D:/" drive when RAM falls below 7000 MegaBytes, and is fractionated and processed in chunks of 140000 rows each using 3 CPU threads.|
+| **good_names** |A TRUE/FALSE logical for user convenience. When `TRUE` (default), separately outputs output column names formatted for easier interpretability.|
+| **calc_anom** |TRUE/FALSE logical. Should anomalies from the overall mean be calculated when `mode="summary"` and `summary_func!="total"`? Defaults to `FALSE`.|
+| **calc_sum** |TRUE/FALSE logical. When `TRUE`, calculates the sum of imported data at each point location when `mode="summary"`.|
+| **n_limit** |A numeric value of minimum non-`NA` sample size at each point location required to summarize data when `mode="summary"`. No sample size limit is applied by default.|
+| **mode** |One of "extract" or "summary". The former extracts and column-binds data as-is from imported files, while the latter carries out additional calculations as specified by `summary_func`, `n_limit`, `calc_sum`, and `calc_anom`.|
+| **remove_miss** |Should missing values be removed? **Not currently used**, and values marked as missing in the original data are always filtered out.|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
@@ -143,15 +143,12 @@ Visualises the data created with `clim_summary` (or that from any suitable .csv 
 clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA, plot_aes = list(c("fill", "size"), NULL), pie_plot=c(FALSE, 1, 0.005), separ = ",", coord_vars = c("Longitude", "Latitude"), sat_vars, sat_varlabs=sat_vars, scale_alpha=c(0.3, 1), scale_symbol=c(21:25), scale_size="default", sat_sub = list(NULL, "transparent"), sat_rasterize = TRUE, rast_res = c(NA, NA, 3), rast_type = "raster", sat_contours=NULL, satcont_type = c("lines",  1, 1.2), plot_cols=rep(list("default"),10), proj_orig, proj_init="WGS84", proj_final, bathy_res="none", bathy_contours=NULL, coast_res=c("low", "ifb"), bathy_sub = c(-6000:0), coord_sub=NULL, sat_values = "default", sat_breaks="default", break_num=5, sat_lims="default", scale_opts=c(0, 3, FALSE, FALSE), size_lims = c("default", FALSE), leg_labs=waiver(), x_lab="Longitude", y_lab="Latitude", grat=list("WGS84", seq(0, 360, 20), seq(0, 90, 10), "grey15", 1, 0.7), export_results="all", print_plots="all", export_path, width=10, height=10, point_size=12)
 ```
 
-#### Arguments
+#### Feature-complete arguments
 | Argument | Description |
 | ------------- |-------------|
-| **core_dir** |desc|
-| **sat_data** |desc|
-| **point_data** |desc|
-| **point_vars** |desc|
+| **core_dir** |Character directory path where ClimMap Toolkit is located (e.g. "D:/Climate Data").|
+| **sat_data** |Character filepath to satellite data for plotting, or an equivalent R `data.frame` object.|
 | **plot_aes** |desc|
-| **pie_plot** |desc|
 | **separ** |desc|
 | **coord_vars** |desc|
 | **sat_vars** |desc|
@@ -163,7 +160,7 @@ clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA
 | **sat_rasterize** |desc|
 | **rast_res** |desc|
 | **rast_type** |desc|
-| **sat_contours** |desc|
+| **sat_contours** |A numeric vector of values for which to plot contours.|
 | **satcont_type** |desc|
 | **plot_cols** |desc|
 | **proj_orig** |desc|
@@ -180,15 +177,22 @@ clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA
 | **scale_opts** |desc|
 | **size_lims** |desc|
 | **leg_labs** |desc|
-| **x_lab** |desc|
-| **y_lab** |desc|
+| **x_lab** |The x-axis label for plotted maps (e.g. "Longitude").|
+| **y_lab** |The y-axis label for plotted maps (e.g. "Latitude").|
 | **grat** |desc|
-| **export_results** |desc|
-| **print_plots** |desc|
-| **export_path** |desc|
-| **width** |desc|
-| **height** |desc|
-| **point_size** |desc|
+| **export_results** |Character specifying the type of results to export. One of: "all" or "plots" (the latter forgoes exporting contours specified by `sat_contours`).|
+| **print_plots** |Character specifying the type of plots to display in R. One of: "none", "sat" (satellite grids), "point" (sample locations from `point_data`, **WIP**!), "all".|
+| **export_path** |Character value denoting the directory to which function output is exported.|
+| **width** |The numeric value for width of exported .PDF and/or .PNG plots. Defaults to 10.|
+| **height** |The numeric value for height of exported .PDF and/or .PNG plots. Defaults to 10.|
+| **point_size** |The point/symbol size of exported .PDF and/or .PNG plots. Defaults to 12.|
+
+#### Work In Progress (WIP) arguments
+| Argument | Description |
+| ------------- |-------------|
+| **point_data** |desc|
+| **point_vars** |desc|
+| **pie_plot** |desc|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
