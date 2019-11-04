@@ -263,7 +263,7 @@ clim_locate <- function(sat_data, point_data, ex_method="bilinear", coord_vars=c
 | ------------- |-------------|
 | **sat_data** |Character filepath to satellite data, or an equivalent R `data.frame` object.|
 | **point_data** |Character denoting a filepath, or an R `data.frame` object containing coordinates for which `sat_data` values are to be determined.|
-| **ex_method** |One of "simple" or "bilinear"; denotes the method used for determining satellite data value at given point locations. See `?raster::extract` for further information.|
+| **ex_method** |One of "simple" or "bilinear"; denotes the method used for determining satellite data values at given point locations. See `?raster::extract` for further information.|
 | **coord_vars** |Character vector of length 2 with column names corresponding to x and y coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **sat_vars** |Character vector of satellite data variable column names. Identifies variables whose values are to be determined for `point_data` coordinates.|
 | **sat_varlabs** |An optional character vector of alternative satellite variable names, ordered in the same way as (and of equivalent length to) `sat_vars`.|
