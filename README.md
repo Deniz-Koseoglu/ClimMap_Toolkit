@@ -149,16 +149,16 @@ clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA
 | **core_dir** |Character directory path where ClimMap Toolkit is located (e.g. "D:/Climate Data").|
 | **sat_data** |Character filepath to satellite data for plotting, or an equivalent R `data.frame` object.|
 | **separ** |The separator value used for `sat_data`. Defaults to `","` for .csv files.|
-| **coord_vars** |A numeric vector of length 4 providing spatial coordinate limits for mapping in the format `c(minimum latitude, maximum latitude, minimum longitude, maximum longitude)`.|
+| **coord_vars** |Character vector of length 2 with column names corresponding to x and y coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **sat_vars** |Character vector of satellite data variable column names. Identifies variables to be plotted as individual maps.|
-| **sat_varlabs** |An optional character vector of labels for `sat_vars` (has to be of equal length).|
+| **sat_varlabs** |An optional character vector of labels for `sat_vars` (has to be of equal length). Uses `sat_data` column names by default.|
 | **sat_sub** |A list of length 2, where the **first element** is a numeric vector specifying the range of values to remove from plotted `sat_data`, and the **second element** provides the format of such data (the default value, `"transparent"`, renders values in `sat_sub[[1]]` invisible).|
 | **sat_rasterize** |TRUE/FALSE logical. Should `sat_data` be converted to a `raster`? `TRUE` by default; when `FALSE`, `sat_data` is plotted as individual points, which is much more computationally-expensive and prevents `sat_contours` from working properly.|
 | **rast_res** |A vector of length 3 containing horizontal and vertical raster resolution for `sat_data` (in `proj_final`), and the number of decimal places to which the coordinates are rounded (3 by default).|
 | **rast_type** |Character. Determines the `sat_data` mapping type. One of: "raster" (default) or "tile". The latter is more computationally-expensive and only serves as an alternative in case `sat_rasterize` fails to rasterize the data.|
 | **sat_contours** |A numeric vector of values for which to plot contours.|
 | **satcont_type** |A vector of length 3, where the **first element** is one of: "filled" (polygons), "lines" (polylines), or "none"; the **second** and **third** elements are numeric and control the linetype (available values listed [here](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/)) and line width, respectively.|
-| **plot_cols** |desc|
+| **plot_cols** ||
 | **proj_orig** |The original projection of `sat_data` provided by the source repository (e.g. NSIDC). A character value either containing a `proj4` string or one of the preset projections: "ONP" (Orthographic North Polar), "LANP" (Lambert Azimuthal Equal Area North Polar; EPSG 3408), "SNP" (Stereographic North Polar; EPSG 3411 or 3413 for a specific datum), "AENP" (Azimuthal Equidistant North Polar), "OSP" (Orthographic South Polar), "SSP" (Stereographic South Polar; EPSG 3031), "SSP_alt" (alternative Stereographic South Polar), "LASP" (Lambert Azimuthal Equal Area South Polar), "WGS84" (standard WGS84 ellipsoid world projection; EPSG 4326).|
 | **proj_init** |The projection of `sat_data` at the time of import.|
 | **proj_final** |The final projection of to plot `sat_data` in. The options are identical to those of `proj_orig` and `proj_init`.|
@@ -166,24 +166,23 @@ clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA
 | **bathy_contours** |A numeric vector providing bathymetry contours to be plotted when `bathy_res!="none"`, e.g. `bathy_contours=c(-200, -500, -1250)` will plot contours at depths of 200, 500, and 1250m.|
 | **coast_res** |Character vector of length 2, where the **first element** denotes the resolution of coastlines to be plotted and is one of: "none", "crude", "low" (default), "medium", "high", "full". The **second element** controls the plotting of Antarctica separately and is one of: "none", "ifb" (ice front boundary-based coastlines), or "gl" (grounding line-based coastlines).|
 | **bathy_sub** |A numeric vector of depths (m) to plot when `bathy_res!="none"`, e.g. `bathy_sub=c(-1000:0)` will only plot depths between 1000 and 0m.|
-| **coord_sub** |desc|
-| **sat_values** |desc|
-| **sat_breaks** |desc|
-| **sat_lims** |desc|
-| **size_lims** |desc|
+| **coord_sub** |Numeric vector of length 4 specifying the degree of zooming in plotted `sat_data` maps in the format: `c(left-right x-coordinate zoom, right-left x-coordinate zoom, upper-lower y-coordinate zoom, lower-upper y-coordinate zoom)`. For example `coord_sub=c(0.6, 0.6, 0.6, 0.6)` display 0.6 (i.e. 60%) of the maximum coordinate range on each side of the plotted map(s).|
+| **sat_values** |A numeric vector of `sat_data` values to plot in the **map legend**, in the format `c(minimum value, maximum value, value interval)`; for instance, `c(20, 100, 1)` when analysing NSIDC SIC data plots sea ice concentrations from 20-100% with an interval of 1%. Only works when `bathy_res="none"` (i.e. bathymetry is not plotted). The default follows standard `ggplot2` routines.|
+| **sat_breaks** |A numeric vector of `sat_data` value breaks to display in the legend. Only works when `bathy_res="none"` (i.e. bathymetry is not plotted). The default follows standard `ggplot2` routines.|
+| **sat_lims** |A numeric vector of length 2 specifying the range of `sat_data` values to plot, e.g. `c(0, 100)`. Only works when `bathy_res="none"` (i.e. bathymetry is not plotted). The default follows standard `ggplot2` routines.|
 | **leg_labs** |A character vector of length 3, where the **first** and **second** elements denote the legend labels for `sat_data` and associated contours. The **third element** is not currently in use.|
 | **x_lab** |The x-axis label for plotted maps (e.g. "Longitude").|
 | **y_lab** |The y-axis label for plotted maps (e.g. "Latitude").|
-| **grat** |A list of maximum length 7 specifying whether graticules are plotted, and their aesthetic. The **first element** is one of: "none", "WGS84", "Distance" for no graticules, latitude/longitude graticules, or "distance" (i.e. planar) graticules. The **second** and **third** elements are numeric vectors of length 3 and adjusting x- and y-coordinate resolution, respectively, in the format: `c(minimum coordinate, maximum coordinate, coordinate step/interval)`. The **fourth element** specifies graticule colour (e.g. `"grey15"` by default). The **fifth**, **sixth**, and **seventh** elements denote linetype, line width, and tick number (when graticule type is `"Distance"`).|
+| **grat** |A list of maximum length 7 specifying whether graticules are plotted, and their aesthetic. The **first element** is one of: "none", "WGS84", "Distance" for no graticules, latitude/longitude graticules, or "distance" (i.e. planar) graticules. The **second** and **third** elements are numeric vectors of length 3 and adjusting x- and y-coordinate resolution, respectively, in the format: `c(minimum coordinate, maximum coordinate, coordinate step/interval)`. The **fourth element** specifies graticule colour (e.g. `"grey15"` by default). The **fifth**, **sixth**, and **seventh** elements denote linetype, line width, and tick number (when graticule type is `"Distance"`). **NOTE**: If a list of length<7 is provided, default values are used for unspecified aesthetics.|
 | **export_results** |Character specifying the type of results to export. One of: "all" or "plots" (the latter forgoes exporting contours specified by `sat_contours`).|
 | **print_plots** |Character specifying the type of plots to display in R. One of: "none", "sat" (satellite grids), "point" (sample locations from `point_data`, **WIP**!), "all".|
 | **export_path** |Character value denoting the directory to which function output is exported.|
-| **width** |The numeric value for width of exported .PDF and/or .PNG plots. Defaults to 10.|
-| **height** |The numeric value for height of exported .PDF and/or .PNG plots. Defaults to 10.|
-| **point_size** |The point/symbol size of exported .PDF and/or .PNG plots. Defaults to 12.|
+| **width** |The numeric value for width of exported .PDF plots. Defaults to 10.|
+| **height** |The numeric value for height of exported .PDF plots. Defaults to 10.|
+| **point_size** |The point/symbol size of exported .PDF plots. Defaults to 12.|
 
 #### Work In Progress (WIP) arguments
-The following arguments are currently included in the source code but are **WIP** and should not be used as of version 0.9 (11/2019): `point_data`, `point_vars`, `pie_plot`, `scale_alpha`, `scale_symbol`, `scale_size`, `plot_aes`, `scale_opts`.
+The following arguments are currently included in the source code but are **WIP** and should not be used as of ClimMap Toolkit version 0.9 (11/2019): `point_data`, `point_vars`, `pie_plot`, `scale_alpha`, `scale_symbol`, `scale_size`, `plot_aes`, `scale_opts`, and `size_lims`.
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
@@ -203,23 +202,22 @@ clim_region <- function(core_dir, poly_path, poly_type="shp_file", poly_list="al
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **core_dir** |desc|
-| **poly_path** |desc|
-| **poly_type** |desc|
-| **poly_list** |desc|
-| **poly_pat** |desc|
-| **sat_data** |desc|
-| **sat_vars** |desc|
-| **sat_varlabs** |desc|
-| **mean_col** |desc|
+| **core_dir** |Character directory path where ClimMap Toolkit is located (e.g. "D:/Climate Data").|
+| **poly_path** |Character directory where ESRI .SHP polygons to summarize by are stored.|
+| **poly_type** |Character. The type of polygon shapefile used. Currently, **only `"shp_file"` is supported**.|
+| **poly_list** |Character value/vector specifying which polygons from `poly_path` to use; `"all"` (default) uses all polygons. Any combination of filenames contained in `poly_path` can be specified.|
+| **poly_pat** |The unique identifier of polygon filetype. Currently, **only `"\\.shp$"` for ESRI .shp files is supported**.|
+| **sat_data** |Character filepath to satellite data, or an equivalent R `data.frame` object.|
+| **sat_vars** |Character vector of satellite data variable column names. Identifies variables to be summarized by polygon.|
+| **sat_varlabs** |An optional character vector of labels for `sat_vars` (has to be of equal length). Uses `sat_data` column names by default.|
+| **coord_vars** |Character vector of length 2 with column names corresponding to x and y coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **bar_varlabs** |desc|
-| **coord_vars** |desc|
-| **check_inter** |desc|
-| **proj_init** |desc|
-| **proj_final** |desc|
-| **coast_res** |desc|
+| **check_inter** |TRUE/FALSE logical. Should intersections be removed from polygons before processing? Computationally intensive.|
+| **proj_init** |The projection of `sat_data` at the time of import.|
+| **proj_final** |The final projection of to plot `sat_data` in. The options are identical to those of `proj_init`.|
+| **coast_res** |Character vector of length 2, where the **first element** denotes the resolution of coastlines to be plotted and is one of: "none", "crude", "low" (default), "medium", "high", "full". The **second element** controls the plotting of Antarctica separately and is one of: "none", "ifb" (ice front boundary-based coastlines), or "gl" (grounding line-based coastlines).|
 | **coord_sub** |desc|
-| **grat** |desc|
+| **grat** |A list of maximum length 7 specifying whether graticules are plotted, and their aesthetic. The **first element** is one of: "none", "WGS84", "Distance" for no graticules, latitude/longitude graticules, or "distance" (i.e. planar) graticules. The **second** and **third** elements are numeric vectors of length 3 and adjusting x- and y-coordinate resolution, respectively, in the format: `c(minimum coordinate, maximum coordinate, coordinate step/interval)`. The **fourth element** specifies graticule colour (e.g. `"grey15"` by default). The **fifth**, **sixth**, and **seventh** elements denote linetype, line width, and tick number (when graticule type is `"Distance"`). **NOTE**: If a list of length<7 is provided, default values are used for unspecified aesthetics.|
 | **plot_cols** |desc|
 | **plot_type** |desc|
 | **plot_labs** |desc|
@@ -232,14 +230,14 @@ clim_region <- function(core_dir, poly_path, poly_type="shp_file", poly_list="al
 | **plot_oob** |desc|
 | **extra_trends** |desc|
 | **export_plots** |desc|
-| **export_path** |desc|
-| **height** |desc|
-| **width** |desc|
-| **point_size** |desc|
-| **dpi** |desc|
+| **export_path** |Character value denoting the directory to which function output is exported.|
+| **height** |The numeric value for width of exported .PDF and/or .PNG plots. Defaults to 10.|
+| **width** |The numeric value for width of exported .PDF and/or .PNG plots. Defaults to 10.|
+| **point_size** |The point/symbol size of exported .PDF and/or .PNG plots. Defaults to 12.|
+| **dpi** |The Dots Per Inch (DPI) resolution of exported .PNG plots (500 by default).|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions. Note that the argument `mean_col` for `clim_region` is currently **WIP** and may be deprecated.
 
 #### Values
 A list containing a `data.frame` with spatially-averaged data and `ggplot2` plots as specified by the user.
