@@ -211,25 +211,24 @@ clim_region <- function(core_dir, poly_path, poly_type="shp_file", poly_list="al
 | **sat_vars** |Character vector of satellite data variable column names. Identifies variables to be summarized by polygon.|
 | **sat_varlabs** |An optional character vector of labels for `sat_vars` (has to be of equal length). Uses `sat_data` column names by default.|
 | **coord_vars** |Character vector of length 2 with column names corresponding to x and y coordinates. Defaults to `c("Longitude", "Latitude")`.|
-| **bar_varlabs** |desc|
+| **bar_varlabs** |An optional character vector of labels to use in summary plots when `plot_type` is `"point"` or `"bar"`.|
 | **check_inter** |TRUE/FALSE logical. Should intersections be removed from polygons before processing? Computationally intensive.|
 | **proj_init** |The projection of `sat_data` at the time of import.|
 | **proj_final** |The final projection of to plot `sat_data` in. The options are identical to those of `proj_init`.|
 | **coast_res** |Character vector of length 2, where the **first element** denotes the resolution of coastlines to be plotted and is one of: "none", "crude", "low" (default), "medium", "high", "full". The **second element** controls the plotting of Antarctica separately and is one of: "none", "ifb" (ice front boundary-based coastlines), or "gl" (grounding line-based coastlines).|
-| **coord_sub** |desc|
+| **coord_sub** |Numeric vector of length 4 specifying the degree of zooming in plotted `sat_data` maps in the format: `c(left-right x-coordinate zoom, right-left x-coordinate zoom, upper-lower y-coordinate zoom, lower-upper y-coordinate zoom)`. For example `coord_sub=c(0.6, 0.6, 0.6, 0.6)` display 0.6 (i.e. 60%) of the maximum coordinate range on each side of the plotted map(s).|
 | **grat** |A list of maximum length 7 specifying whether graticules are plotted, and their aesthetic. The **first element** is one of: "none", "WGS84", "Distance" for no graticules, latitude/longitude graticules, or "distance" (i.e. planar) graticules. The **second** and **third** elements are numeric vectors of length 3 and adjusting x- and y-coordinate resolution, respectively, in the format: `c(minimum coordinate, maximum coordinate, coordinate step/interval)`. The **fourth element** specifies graticule colour (e.g. `"grey15"` by default). The **fifth**, **sixth**, and **seventh** elements denote linetype, line width, and tick number (when graticule type is `"Distance"`). **NOTE**: If a list of length<7 is provided, default values are used for unspecified aesthetics.|
 | **plot_cols** |desc|
-| **plot_type** |desc|
-| **plot_labs** |desc|
-| **y_lab** |desc|
-| **plot_by** |desc|
-| **print_plots** |desc|
-| **facet_plots** |desc|
-| **plot_opts** |desc|
-| **plot_extras** |desc|
-| **plot_oob** |desc|
-| **extra_trends** |desc|
-| **export_plots** |desc|
+| **plot_type** |Character specifying the type of summary plot to create. One of: "point" (plot mean values per polygon as points), "bar" (...as bars), "heat" (**????????**), "heat_rank" (**????????**). The latter two are only supported when `facet_plots="summarise"`.|
+| **plot_labs** |Character vector of length 2 denoting the x- and y-axis labels in plotted maps. Identical to `coord_vars` by default.|
+| **y_lab** |Character. The y-axis label for summary plots, with a default of `"Mean"`.|
+| **plot_by** |Character. One of: "polygon", "varib". Specifies whether to display summary (mean) values in summary plots by polygon (`poly_list`) or variable (`sat_vars`), respectively.|
+| **print_plots** |TRUE/FALSE logical. Should plots be displayed in R? Defaults to `TRUE`.|
+| **facet_plots** |TRUE/FALSE logical. Should summary plots be faceted? Defaults to `TRUE`. A third possible value, `"summarise"`, combines all plots into a heatmap instead of standard faceting (when `plot_type` is either `"heat"` or `"heat_rank"`.|
+| **plot_opts** |Numeric vector of length 3. Determines additional options for summary plots. The **first element** specifies the angle by which variable/polygon labels are tilted. The **second element** is the degree of vertical justification `plot_type="bar"`. The **third element ????????** |
+| **plot_extras** |Character value or vector representing extra information to include in summary plots. Any of: "sd" (standard deviation), "qrt" (quartiles), and/or "n" (sample size). The latter two only function when `plot_type="bar"`.|
+| **plot_oob** |Should observations in `sat_data` which were Out of Bounds (i.e. not assignable to any polygon within `poly_list`) be included in summary plots? Defaults to `FALSE`.|
+| **export_plots** |Character specifying which format to export plots in. One of: "pdf" or "png".|
 | **export_path** |Character value denoting the directory to which function output is exported.|
 | **height** |The numeric value for width of exported .PDF and/or .PNG plots. Defaults to 10.|
 | **width** |The numeric value for width of exported .PDF and/or .PNG plots. Defaults to 10.|
@@ -237,7 +236,7 @@ clim_region <- function(core_dir, poly_path, poly_type="shp_file", poly_list="al
 | **dpi** |The Dots Per Inch (DPI) resolution of exported .PNG plots (500 by default).|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions. Note that the argument `mean_col` for `clim_region` is currently **WIP** and may be deprecated.
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions. Note that the arguments `mean_col` and `extra_trends` for `clim_region` is currently **WIP** and may be deprecated.
 
 #### Values
 A list containing a `data.frame` with spatially-averaged data and `ggplot2` plots as specified by the user.
