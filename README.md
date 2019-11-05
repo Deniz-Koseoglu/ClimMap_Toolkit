@@ -149,19 +149,16 @@ clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA
 | **core_dir** |Character directory path where ClimMap Toolkit is located (e.g. "D:/Climate Data").|
 | **sat_data** |Character filepath to satellite data for plotting, or an equivalent R `data.frame` object.|
 | **plot_aes** |desc|
-| **separ** |desc|
-| **coord_vars** |desc|
-| **sat_vars** |desc|
-| **sat_varlabs** |desc|
-| **scale_alpha** |desc|
-| **scale_symbol** |desc|
-| **scale_size** |desc|
-| **sat_sub** |desc|
-| **sat_rasterize** |desc|
+| **separ** |The separator value used for `sat_data`. Defaults to `","` for .csv files.|
+| **coord_vars** |A numeric vector of length 4 providing spatial coordinate limits for mapping in the format `c(minimum latitude, maximum latitude, minimum longitude, maximum longitude)`.|
+| **sat_vars** |Character vector of satellite data variable column names. Identifies variables to be plotted as individual maps.|
+| **sat_varlabs** |An optional character vector of labels for `sat_vars` (has to be of equal length).|
+| **sat_sub** |A list of length 2, where the **first element** is a numeric vector specifying the range of values to remove from plotted `sat_data`, and the **second element** provides the format of such data (the default value, `"transparent"`, renders values in `sat_sub[[1]]` invisible).|
+| **sat_rasterize** |TRUE/FALSE logical. |
 | **rast_res** |desc|
 | **rast_type** |desc|
 | **sat_contours** |A numeric vector of values for which to plot contours.|
-| **satcont_type** |desc|
+| **satcont_type** |A vector of length 3, where the **first element** is one of: "filled" (polygons), "lines" (polylines), or "none"; the **second** and **third** elements are numeric and control the linetype (available values listed [here](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/)) and line width, respectively.|
 | **plot_cols** |desc|
 | **proj_orig** |desc|
 | **proj_init** |desc|
@@ -193,6 +190,9 @@ clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA
 | **point_data** |desc|
 | **point_vars** |desc|
 | **pie_plot** |desc|
+| **scale_alpha** |desc|
+| **scale_symbol** |desc|
+| **scale_size** |desc|
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
