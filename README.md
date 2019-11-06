@@ -65,7 +65,9 @@ Automatically downloads files from various HTTP, THREDDS, or FTP repositories ac
 
 #### Usage
 ```r
-clim_download <- function(repository="NSIDC", hemisphere="north", frequency="monthly", data_type="Chla", grid_res="9km", year, month, res_path, usrname=NA, pword=NA, suppr_msgs=TRUE, opt_down=TRUE, down_mode="wb", dcores=detectCores(), max_retries=6, shared_folder=TRUE)
+clim_download <- function(repository="NSIDC", hemisphere="north", frequency="monthly", 
+data_type="Chla", grid_res="9km", year, month, res_path, usrname=NA, pword=NA, suppr_msgs=TRUE, 
+opt_down=TRUE, down_mode="wb", dcores=detectCores(), max_retries=6, shared_folder=TRUE)
 ```
 
 #### Arguments
@@ -101,7 +103,11 @@ Extracts data from downloaded NetCDF4 or HDF files, with or without further calc
 
 #### Usage
 ```r
-clim_summary <- function(remove_miss="all", frequency="daily", repository="NSIDC", hemisphere="north", data_type="Chla", nc_path, year_rng="all", month_rng="all", day_rng=NULL, var_names="default", coord_subset=NULL, subset_order=c("year", "month", ""), summary_func="total", export_path=NULL, big_data, good_names=TRUE, calc_anom=FALSE, calc_sum=FALSE, n_limit=0, mode="summary")
+clim_summary <- function(remove_miss="all", frequency="daily", repository="NSIDC", 
+hemisphere="north", data_type="Chla", nc_path, year_rng="all", month_rng="all", 
+day_rng=NULL, var_names="default", coord_subset=NULL, subset_order=c("year", "month", ""), 
+summary_func="total", export_path=NULL, big_data, good_names=TRUE, calc_anom=FALSE, 
+calc_sum=FALSE, n_limit=0, mode="summary")
 ```
 
 #### Arguments
@@ -140,7 +146,18 @@ Visualises the data created with `clim_summary` (or that from any suitable .csv 
 
 #### Usage
 ```r
-clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA, plot_aes = list(c("fill", "size"), NULL), pie_plot=c(FALSE, 1, 0.005), separ = ",", coord_vars = c("Longitude", "Latitude"), sat_vars, sat_varlabs=sat_vars, scale_alpha=c(0.3, 1), scale_symbol=c(21:25), scale_size="default", sat_sub = list(NULL, "transparent"), sat_rasterize = TRUE, rast_res = c(NA, NA, 3), rast_type = "raster", sat_contours=NULL, satcont_type = c("lines",  1, 1.2), plot_cols=rep(list("default"),10), proj_orig, proj_init="WGS84", proj_final, bathy_res="none", bathy_contours=NULL, coast_res=c("low", "ifb"), bathy_sub = c(-6000:0), coord_sub=NULL, sat_values = "default", sat_breaks="default", break_num=5, sat_lims="default", scale_opts=c(0, 3, FALSE, FALSE), size_lims = c("default", FALSE), leg_labs=waiver(), x_lab="Longitude", y_lab="Latitude", grat=list("WGS84", seq(0, 360, 20), seq(0, 90, 10), "grey15", 1, 0.7), export_results="all", print_plots="all", export_path, width=10, height=10, point_size=12)
+clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA, 
+plot_aes = list(c("fill", "size"), NULL), pie_plot=c(FALSE, 1, 0.005), separ = ",", 
+coord_vars = c("Longitude", "Latitude"), sat_vars, sat_varlabs=sat_vars, scale_alpha=c(0.3, 1), 
+scale_symbol=c(21:25), scale_size="default", sat_sub = list(NULL, "transparent"), 
+sat_rasterize = TRUE, rast_res = c(NA, NA, 3), rast_type = "raster", sat_contours=NULL, 
+satcont_type = c("lines",  1, 1.2), plot_cols=rep(list("default"),10), proj_orig, 
+proj_init="WGS84", proj_final, bathy_res="none", bathy_contours=NULL, coast_res=c("low", "ifb"), 
+bathy_sub = c(-6000:0), coord_sub=NULL, sat_values = "default", sat_breaks="default", 
+break_num=5, sat_lims="default", scale_opts=c(0, 3, FALSE, FALSE), size_lims = c("default", FALSE), 
+leg_labs=waiver(), x_lab="Longitude", y_lab="Latitude", grat=list("WGS84", seq(0, 360, 20), 
+seq(0, 90, 10), "grey15", 1, 0.7), export_results="all", print_plots="all", export_path, width=10, 
+height=10, point_size=12)
 ```
 
 #### Feature-complete arguments
@@ -195,7 +212,15 @@ Spatially aggregates extracted/summarised data from any .csv (e.g. that created 
 
 #### Usage
 ```r
-clim_region <- function(core_dir, poly_path, poly_type="shp_file", poly_list="all", poly_pat="\\.shp$", separ=",", sat_data, sat_vars, sat_varlabs=NA, mean_col=NA, bar_varlabs="default", coord_vars=c("Longitude", "Latitude"), check_inter=FALSE, proj_init="WGS84", proj_final, coast_res=c("low", "ifb"), coord_sub=NULL, grat=list("none", seq(0, 360, 20), seq(0, 90, 10), "grey15", 1, 0.7, 5), plot_cols=rep(list("default"), 7), plot_type="heat_rank", plot_labs=coord_vars, y_lab="Mean", plot_by="varib", print_plots=TRUE, facet_plots="summarise", plot_opts=c(45, -0.2, 7), plot_extras="sd", plot_oob=FALSE, extra_trends=FALSE, export_plots="pdf", export_path, height=10, width=10, point_size=12, dpi=500)
+clim_region <- function(core_dir, poly_path, poly_type="shp_file", poly_list="all", 
+poly_pat="\\.shp$", separ=",", sat_data, sat_vars, sat_varlabs=NA, mean_col=NA, 
+bar_varlabs="default", coord_vars=c("Longitude", "Latitude"), check_inter=FALSE, 
+proj_init="WGS84", proj_final, coast_res=c("low", "ifb"), coord_sub=NULL, 
+grat=list("none", seq(0, 360, 20), seq(0, 90, 10), "grey15", 1, 0.7, 5), 
+plot_cols=rep(list("default"), 7), plot_type="heat_rank", plot_labs=coord_vars, 
+y_lab="Mean", plot_by="varib", print_plots=TRUE, facet_plots="summarise", 
+plot_opts=c(45, -0.2, 7), plot_extras="sd", plot_oob=FALSE, extra_trends=FALSE, 
+export_plots="pdf", export_path, height=10, width=10, point_size=12, dpi=500)
 ```
 
 #### Arguments
@@ -246,7 +271,9 @@ Determines values of extracted/summarised data at any number of point locations 
 
 #### Usage
 ```r
-clim_locate <- function(sat_data, point_data, ex_method="bilinear", coord_vars=c("Longitude", "Latitude"), sat_vars=sat_data[,!colnames(sat_data) %in% coord_vars], sat_varlabs=NA, separ=",", proj_init="WGS84", proj_orig, rast_res=c(NA, NA, 3), export_path=getwd())
+clim_locate <- function(sat_data, point_data, ex_method="bilinear", 
+coord_vars=c("Longitude", "Latitude"), sat_vars=sat_data[,!colnames(sat_data) %in% coord_vars], 
+sat_varlabs=NA, separ=",", proj_init="WGS84", proj_orig, rast_res=c(NA, NA, 3), export_path=getwd())
 ```
 
 #### Arguments
@@ -276,7 +303,8 @@ Calculates phytoplankton biomass from particulate backscattering coefficient (b<
 
 #### Usage
 ```r
-clim_cphyto <- function(bbp_data, algo="BH05", slp=NA, incpt=0, bkgrd=NA, coord_vars=c("Longitude", "Latitude"), ex_path=getwd())
+clim_cphyto <- function(bbp_data, algo="BH05", slp=NA, incpt=0, bkgrd=NA, 
+coord_vars=c("Longitude", "Latitude"), ex_path=getwd())
 ```
 
 #### Arguments
@@ -326,7 +354,9 @@ Models phytoplankton division/growth rates (μ; d<sup>-1</sup>) according to [Be
 
 #### Usage
 ```r
-clim_divrate <- function(chla=NA, cphyto, kd490, ipar, par, sst, zeu=NA, dayl, mld, aph, q_val=2, method=c("BH05", "BH17"), chl_c="sat", coord_vars=c("Longitude", "Latitude"), cons_par=TRUE, div_nums=c(64,1), ex_path=getwd(), res="depth_only")
+clim_divrate <- function(chla=NA, cphyto, kd490, ipar, par, sst, zeu=NA, dayl, mld, aph, 
+q_val=2, method=c("BH05", "BH17"), chl_c="sat", coord_vars=c("Longitude", "Latitude"), 
+cons_par=TRUE, div_nums=c(64,1), ex_path=getwd(), res="depth_only")
 ```
 
 #### Arguments
@@ -363,7 +393,9 @@ Calculates a record of relative change from a time series (e.g. daily/8-daily ch
 
 #### Usage
 ```r
-clim_btrack <- function(data, sat_vars, coord_vars=c("xcoord", "ycoord", "Longitude", "Latitude"), run_window = 8, mean_fun=c("arithm", "arithm"), var_lab="default", method="mckibben", times=c("days", NA), year_val=2009, monthly_aggr=TRUE, export_path=NA, extras=TRUE, smoothing=NA)
+clim_btrack <- function(data, sat_vars, coord_vars=c("xcoord", "ycoord", "Longitude", "Latitude"), 
+run_window = 8, mean_fun=c("arithm", "arithm"), var_lab="default", method="mckibben", 
+times=c("days", NA), year_val=2009, monthly_aggr=TRUE, export_path=NA, extras=TRUE, smoothing=NA)
 ```
 
 #### Arguments
@@ -395,7 +427,9 @@ Detects bloom start/end dates, duration ([Hopkins et al., 2015](https://doi.org/
 
 #### Usage
 ```r
-clim_bloom <- function(data, coord_vars=c("Longitude", "Latitude"), consec_num=2, thres_percent=0.05, thres_num=2, grep_patt=".*days[[:digit:]]{1,3}.([[:digit:]]{1,3}).$", varlab="chlor_a", export_path, bloom_dur=FALSE, smoothing=NA, smooth_max=NA)
+clim_bloom <- function(data, coord_vars=c("Longitude", "Latitude"), consec_num=2, 
+thres_percent=0.05, thres_num=2, grep_patt=".*days[[:digit:]]{1,3}.([[:digit:]]{1,3}).$", 
+varlab="chlor_a", export_path, bloom_dur=FALSE, smoothing=NA, smooth_max=NA)
 ```
 
 #### Arguments
@@ -445,7 +479,8 @@ Derives the slope (absolute or percentage) of a least-squares trend from timeser
 
 #### Usage
 ```r
-clim_trend <- function(data, trend_vars, trend_unit="default", add_stats = TRUE, coord_vars = c("Longitude", "Latitude"), time_span)
+clim_trend <- function(data, trend_vars, trend_unit="default", add_stats = TRUE, 
+coord_vars = c("Longitude", "Latitude"), time_span)
 ```
 
 #### Arguments
