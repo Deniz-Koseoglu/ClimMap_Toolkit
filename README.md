@@ -190,6 +190,7 @@ height=10, point_size=12)
 | **x_lab** |The x-axis label for plotted maps (e.g. "Longitude").|
 | **y_lab** |The y-axis label for plotted maps (e.g. "Latitude").|
 | **grat** |A list of maximum length 7 specifying whether graticules are plotted, and their aesthetic. The **first element** is one of: "none", "WGS84", "Distance" for no graticules, latitude/longitude graticules, or "distance" (i.e. planar) graticules. The **second** and **third** elements are numeric vectors of length 3 and adjusting x- and y-coordinate resolution, respectively, in the format: `c(minimum coordinate, maximum coordinate, coordinate step/interval)`. The **fourth element** specifies graticule colour (e.g. `"grey15"` by default). The **fifth**, **sixth**, and **seventh** elements denote linetype, line width, and tick number (when graticule type is `"Distance"`). **NOTE**: If a list of length<7 is provided, default values are used for unspecified aesthetics.|
+| **plot_cols** |A list of length 10 that specifies the colour palettes used for maps. The **first**, **third**, and **seventh** elements are multi-colour palettes (length>1) specifying, respectively, the `sat_data`, ocean bathymetry, and contour colour palettes, respectively. The following preset colour palettes are available: "SIC", "SIC_heat", "SIC_anom", "MODIS", "ODV", "ODV_bathy", "Alter_bathy", "RYG", and "Melt_Trend". Elements **four to six** are single colours (length=1) controlling the colours of ocean fill, land fill, and coastlines, respectively. The **second** and **eighth to tenth** elements are not currently in use.|
 | **export_results** |Character specifying the type of results to export. One of: "all" or "plots" (the latter forgoes exporting contours specified by `sat_contours`).|
 | **print_plots** |Character specifying the type of plots to display in R. One of: "none", "sat" (satellite grids), "point" (sample locations from `point_data`, **WIP**!), "all".|
 | **export_path** |Character value denoting the directory to which function output is exported.|
@@ -260,7 +261,7 @@ export_plots="pdf", export_path, height=10, width=10, point_size=12, dpi=500)
 | **dpi** |The Dots Per Inch (DPI) resolution of exported .PNG plots (500 by default).|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions. Note that the arguments `mean_col` and `extra_trends` for `clim_region` is currently **WIP** and may be deprecated.
+Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions. Note that the arguments `mean_col` and `extra_trends` for `clim_region` are currently **WIP** and may be deprecated.
 
 #### Values
 A list containing a `data.frame` with spatially-averaged data and `ggplot2` plots as specified by the user.
