@@ -187,9 +187,9 @@ climreg_list[["Chla"]] <- clim_region(core_dir = "D:/ClimMap_Toolkit",
                                       export_path = "D:/ClimMap_Toolkit/Example/Example 1/Clim_Region output/Chla")
 ```
 Examples of `clim_region` output below illustrate the regions identified from polygon shapefiles, and how April-June SIC changed in these regions throughout 1988-2018. In this case, values highlighted in white and blue denote record highs and lows, respectively.
-![Image5](https://i.ibb.co/St7m0x9/CLIM-Regional-2019-11-14-19hr-16min-Page-2.png)
-![Image6](https://i.ibb.co/DgSWYgj/CLIM-Regional-2019-11-14-19hr-16min-Page-3.png)
-
+![Image5](https://i.ibb.co/QNQDp5B/CLIM-Regional-2019-11-14-19hr-16min-Page-2.png)
+![Image6](https://i.ibb.co/vsXp0q8/CLIM-Regional-2019-11-14-19hr-16min-Page-3.png)
+<br></br>
 ### Determining values at point locations
 We will use `clim_locate` to derive, bilinearly, SIC and Chla values at several surface sediment locations. Note that **it is necessary to check whether all point locations are covered by satellite data**. Otherwise, the function returns `NA` for locations where no satellite data is available! As always, the output data is located at `export_path`.
 
