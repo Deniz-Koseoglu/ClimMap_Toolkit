@@ -227,8 +227,8 @@ clim_download(repository = "MODIS_A",
               shared_folder = TRUE)
 ```
 <br></br>
-### Calculating and merging daily average climatologies for days (of year) 91-273
-We will use `clim_summary` within a `for` loop for this purpose. There should then be 183 output .CSV files at `export_path` (one for each day). Days 60 (beginning of March) to 273 (end of September) were chosen since MODIS Aqua provides northern hemisphere coverage during (roughly) this period each year.
+### Calculating and merging daily average climatologies for days (of year) 60-273
+We will use `clim_summary` within a `for` loop for this purpose. There should then be 214 output .CSV files at `export_path` (one for each day). Days 60 (beginning of March) to 273 (end of September) were chosen since MODIS Aqua provides northern hemisphere coverage during (roughly) this period each year.
 
 ```r
 for(i in 60:273) {
@@ -248,13 +248,16 @@ daily_chla_res <- clim_summary(repository = "SeaWifs_MODISA",
 rm(daily_chla_res)
 }
 ```
-Finally, we will use `multMerge` to merge all 183 daily files into a single dataset by their coordinates, and also export the result as a .CSV file.
+Finally, we will use `multMerge` to merge all 214 daily files into a single dataset by their coordinates, and also export the result as a .CSV file.
 
 ```r
 chla_list <- list()
 
 chla_list[["Chla_Concentration"]] <- multMerge(mypath = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Summary output/Individual Daily Files",
                                                use_dt = TRUE)
+
+#Make sure the columns are ordered ascendingly according to day of year
+chla_list[["Chla_Concentration"]] <- chla_list[["Chla_Concentration"]][, order(as.numeric(gsub(".*:([[:digit:]]{1,3})", "\\1", colnames(chla_list[["Chla_Concentration"]]))))]
 
 fwrite(chla_list[["Chla_Concentration"]], file = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Summary output/Final Aggregate/DAILY_Chla_mgm3_2003-2018.csv", na=NA)
 ```
@@ -286,7 +289,7 @@ daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
 An example of what the output may look like (once plotted) can be seen in **Figure 8a** here: [Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings — HBI T<sub>25</sub>", *Quaternary Science Reviews* **523**, 115703](https://doi.org/10.1016/j.epsl.2019.06.038).
 <br></br>
 ### Deriving a record of relative change in Chla
-This can be done using `clim_btrack`. LOESS smoothing is not applied as a pre-processing step in this case, and the McKibben et al. (2012) method is used. The day range is specified to be 91:273 (as before), and differences are calculated between 8-daily averages (set by the `run_window` argument).
+This can be done using `clim_btrack`. LOESS smoothing is not applied as a pre-processing step in this case, and the McKibben et al. (2012) method is used. The day range is specified to be 60:273 (as before), and differences are calculated between 8-daily averages (set by the `run_window` argument).
 
 ```r
 chla_list[["Chla_RelChange"]] <- clim_btrack(data = chla_list[["Chla_Concentration"]],
@@ -308,3 +311,4 @@ chla_list[["Chla_BloomDesc"]] <- clim_bloom(data = chla_list[["Chla_Concentratio
                                             export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Bloom output",
                                             smooth_max = 0.03)
 ```
+This is what the bloom duration (in days) map looks like when plotted in Ocean Data View:
