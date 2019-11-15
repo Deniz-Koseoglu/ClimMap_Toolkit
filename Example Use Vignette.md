@@ -210,3 +210,101 @@ clim_locate(sat_data = satlist[[2]],
 ```
 <br></br>
 ## EXAMPLE 2: Working with daily Chla data
+This exercise will present a way to derive daily satellite-derived Chla timeseries from netCDF/HDF files, and use this to obtain a record of relative (e.g. %) change in Chla (`clim_btrack`), as well as various bloom descriptors (bloom start, end, and duration; see the description and arguments of `clim_bloom`). **NOTE** that certain processing steps in this example are quite time-consuming (in the order of hours).
+<br></br>
+### Downloading daily Chla data
+We will use `clim_download` as before:
+
+```r
+clim_download(repository = "MODIS_A",
+              frequency = "daily",
+              data_type = "Chla",
+              year = 2003:2018,
+              month = "all",
+              res_path = "D:/ClimMap_Toolkit",
+              suppr_msgs = TRUE,
+              opt_down = TRUE,
+              shared_folder = TRUE)
+```
+<br></br>
+### Calculating and merging daily average climatologies for days (of year) 91-273
+We will use `clim_summary` within a `for` loop for this purpose. There should then be 183 output .CSV files at `export_path` (one for each day). Days 91 (beginning of April) to 273 (end of September) were chosen since MODIS Aqua provides northern hemisphere coverage during this period each year.
+
+```r
+for(i in 91:273) {
+  print(paste0("Processing Chla data for day ", i, " of ", max(91:273), "..."))
+daily_chla_res <- clim_summary(repository = "SeaWifs_MODISA",
+                               data_type = "Chla",
+                               frequency = "daily",
+                               nc_path = "D:/ClimMap_Toolkit/Data/SeaWifs_MODISA/Data/Chla/daily",
+                               year_rng = 2003:2018,
+                               day_rng = i,
+                               subset_order = c("year", "day", ""),
+                               summary_func = "total",
+                               coord_subset = c(59, 86, -10, 80),
+                               export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Summary output/Individual Daily Files",
+                               big_data = c("D:/ClimMap_Toolkit/Satellite Processing Results/Big Data", 7000, 1000000, 3),
+                               mode = "summary")
+rm(daily_chla_res)
+}
+```
+Finally, we will use `multMerge` to merge all 183 daily files into a single dataset by their coordinates, and also export the result as a .CSV file.
+
+```r
+chla_list <- list()
+
+chla_list[["Chla_Concentration"]] <- multMerge(mypath = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Summary output/Individual Daily Files",
+                                               use_dt = TRUE)
+
+fwrite(chla_list[["Chla_Concentration"]], file = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Summary output/Final Aggregate/DAILY_Chla_mgm3_2003-2018.csv", na=NA)
+```
+<br></br>
+### Deriving a spatial average daily Chla timeseries for the Barents Sea
+We can use `clim_region` for this purpose as follows:
+
+```r
+daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
+                                  poly_path = "D:/ClimMap_Toolkit/Mapping/regions/AO_MASIE",
+                                  poly_list = "Barents_Sea",
+                                  sat_data = chla_list[["Chla_Concentration"]],
+                                  sat_vars = colnames(chla_list[["Chla_Concentration"]])[-grep("Longitude|Latitude|SD.of", colnames(chla_list[["Chla_Concentration"]]))],
+                                  sat_varlabs = 2003:2018,
+                                  bar_varlabs = "BS",
+                                  proj_final = "ONP",
+                                  coord_sub = c(0.6, 0.5, 0.5, 0.7),
+                                  plot_type = "heat_rank",
+                                  plot_by = "varib",
+                                  facet_plots = "summarise",
+                                  print_plots = FALSE,
+                                  plot_oob = FALSE,
+                                  export_plots = "pdf",
+                                  plot_opts = c(45, -0.2, 12),
+                                  width=15,
+                                  export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Region output")
+```
+
+An example of what the output may look like (once plotted) can be seen in **Figure 8a** here: [Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings — HBI T<sub>25</sub>", *Quaternary Science Reviews* **523**, 115703](https://doi.org/10.1016/j.epsl.2019.06.038).
+<br></br>
+### Deriving a record of relative change in Chla
+This can be done using `clim_btrack`. LOESS smoothing is not applied as a pre-processing step in this case, and the McKibben et al. (2012) method is used. The day range is specified to be 91:273 (as before), and differences are calculated between 8-daily averages (set by the `run_window` argument).
+
+```r
+chla_list[["Chla_RelChange"]] <- clim_btrack(data = chla_list[["Chla_Concentration"]],
+                                             sat_vars = colnames(chla_list[["Chla_Concentration"]])[grep("Mean.of", colnames(chla_list[["Chla_Concentration"]]))],
+                                             run_window = 8,
+                                             method = "mckibben",
+                                             times = c("days", 91:273),
+                                             monthly_aggr = FALSE,
+                                             export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Btrack output",
+                                             smoothing = NA)
+```
+<br></br>
+### Calculating bloom descriptors from Chla data
+Finally, `clim_bloom` is used below to calculate bloom start, end, and duration based on both the absolute Chla maximum and the "smoothed" equivalent (see the `smooth_max` argument description).
+
+```r
+chla_list[["Chla_BloomDesc"]] <- clim_bloom(data = chla_list[["Chla_Concentration"]],
+                                            bloom_dur = TRUE,
+                                            export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Bloom output",
+                                            smooth_max = 0.03)
+```
