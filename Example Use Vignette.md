@@ -6,7 +6,7 @@ Note that all initial function output presented herein is available in the extra
 ## EXAMPLE 1: Working with monthly data
 In this example, [NOAA/NSIDC Sea Ice Concentration (SIC)]() and [MODIS Aqua chlorophyll-*a* (Chla)]() data will be downloaded, summarised to interannual and annual average climatologies, visualised on maps using the Orthographic North Polar (ONP) projection, spatially averaged for various Arctic regions defined by ESRI shapefiles. Finally, SIC and Chla concentrations will be determined for a set of point locations representing surface sediments.
 
-#### Downloading monthly SIC and Chla data
+### Downloading monthly SIC and Chla data
 We will download data via `clim_download` as follows:
 ```r
 #Make sure you have sourced the ClimMap_Toolkit functions!
@@ -37,7 +37,7 @@ clim_download(repository = "MODIS_A",
 ```
 The files should appear in **D:/ClimMap_Toolkit/Data/NSIDC/Data/SIC/nh_monthly** (SIC) and **D:/ClimMap_Toolkit/Data/SeaWifs_MODISA/Data/Chla/monthly** (Chla).
 
-#### Creating average climatologies
+### Creating average climatologies
 We will derive April-June (i.e. "spring") SIC and April-May Chla climatologies using `clim_summary` using downloaded data. First, the SIC data, which is summarised for the period of 1988-2018 and months 4-6 (i.e. April-June). Since we also want the annual mean for each year, we specify `summary_func` to be `"yearly"`. The argument `var_names` specifies only the mean SIC values to work with, and ignores their SDs included in the netCDF files. The .CSV output can be checked at the `export_path` directory, and the climatology is also assigned as a `satlist` element named `"SIC_north"`.
 ```r
 #Create a list to store Clim_Summary output
@@ -76,7 +76,7 @@ satlist[["Chla"]] <- clim_summary(repository = "SeaWifs_MODISA",
 
 ```
 
-#### Plotting interannual climatologies
+### Plotting interannual climatologies
 Below, SIC and Chla maps are created using the April-June (1988-2018) and April-May (2003-2018) climatologies, respectively, that we obtained from `clim_summary`. Below, we specify `satlist[[1]]` (i.e. the first element) to obtain plot data from, and further narrow this down to a single climatology using the `sat_vars` argument. Three contours at 1%, 15%, and 50% SIC are defined in `sat_contours`, but these are not exported, as defined by the `export_results` argument. We also refrain from plotting graticules (`grat`), and exclude SIC values of 0 from the maps (`sat_sub`). Having specified the original (`proj_orig`) and final (`proj_final`) map projections as Stereographic North Polar (SNP) and Orthographic North Polar (ONP), respectively, we also zoom in on the Arctic Ocean using the `coord_sub` argument. As before, output files (.PDF maps, in this case) can be found at `export_path`.
 ```r
 #Determine the name of SIC/Chla columns containing interannual average values (this is what we want to plot!)
