@@ -228,11 +228,11 @@ clim_download(repository = "MODIS_A",
 ```
 <br></br>
 ### Calculating and merging daily average climatologies for days (of year) 91-273
-We will use `clim_summary` within a `for` loop for this purpose. There should then be 183 output .CSV files at `export_path` (one for each day). Days 91 (beginning of April) to 273 (end of September) were chosen since MODIS Aqua provides northern hemisphere coverage during this period each year.
+We will use `clim_summary` within a `for` loop for this purpose. There should then be 183 output .CSV files at `export_path` (one for each day). Days 60 (beginning of March) to 273 (end of September) were chosen since MODIS Aqua provides northern hemisphere coverage during (roughly) this period each year.
 
 ```r
-for(i in 91:273) {
-  print(paste0("Processing Chla data for day ", i, " of ", max(91:273), "..."))
+for(i in 60:273) {
+  print(paste0("Processing Chla data for day ", i, " of ", max(60:273), "..."))
 daily_chla_res <- clim_summary(repository = "SeaWifs_MODISA",
                                data_type = "Chla",
                                frequency = "daily",
@@ -272,7 +272,7 @@ daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
                                   bar_varlabs = "BS",
                                   proj_final = "ONP",
                                   coord_sub = c(0.6, 0.5, 0.5, 0.7),
-                                  plot_type = "heat_rank",
+                                  plot_type = "point",
                                   plot_by = "varib",
                                   facet_plots = "summarise",
                                   print_plots = FALSE,
@@ -293,7 +293,7 @@ chla_list[["Chla_RelChange"]] <- clim_btrack(data = chla_list[["Chla_Concentrati
                                              sat_vars = colnames(chla_list[["Chla_Concentration"]])[grep("Mean.of", colnames(chla_list[["Chla_Concentration"]]))],
                                              run_window = 8,
                                              method = "mckibben",
-                                             times = c("days", 91:273),
+                                             times = c("days", 60:273),
                                              monthly_aggr = FALSE,
                                              export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Btrack output",
                                              smoothing = NA)
