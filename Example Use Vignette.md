@@ -248,7 +248,7 @@ daily_chla_res <- clim_summary(repository = "SeaWifs_MODISA",
 rm(daily_chla_res)
 }
 ```
-Finally, we will use `multMerge` to merge all 214 daily files into a single dataset by their coordinates, and also export the result as a .CSV file.
+Finally, we will use `multMerge` to merge all 214 daily files into a single dataset by their coordinates, check the column order and export the result as a .CSV file.
 
 ```r
 chla_list <- list()
@@ -257,9 +257,16 @@ chla_list[["Chla_Concentration"]] <- multMerge(mypath = "D:/ClimMap_Toolkit/Exam
                                                use_dt = TRUE)
 
 #Make sure the columns are ordered ascendingly according to day of year
-chla_list[["Chla_Concentration"]] <- chla_list[["Chla_Concentration"]][, order(as.numeric(gsub(".*:([[:digit:]]{1,3})", "\\1", colnames(chla_list[["Chla_Concentration"]]))))]
+chla_vars <- chla_list[["Chla_Concentration"]][,grep("Mean.of", colnames(chla_list[["Chla_Concentration"]]))]
+chla_meta <- chla_list[["Chla_Concentration"]][,grep("Longitude|Latitude", colnames(chla_list[["Chla_Concentration"]]))]
+chla_vars <- chla_vars[, order(as.numeric(gsub(".*\\.([[:digit:]]{1,3}).$", "\\1", colnames(chla_vars))))]
+
+chla_list[["Chla_Concentration"]] <- cbind.data.frame(chla_meta, chla_vars)
 
 fwrite(chla_list[["Chla_Concentration"]], file = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Summary output/Final Aggregate/DAILY_Chla_mgm3_2003-2018.csv", na=NA)
+
+rm(chla_meta)
+rm(chla_vars)
 ```
 <br></br>
 ### Deriving a spatial average daily Chla timeseries for the Barents Sea
@@ -271,7 +278,7 @@ daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
                                   poly_list = "Barents_Sea",
                                   sat_data = chla_list[["Chla_Concentration"]],
                                   sat_vars = colnames(chla_list[["Chla_Concentration"]])[-grep("Longitude|Latitude|SD.of", colnames(chla_list[["Chla_Concentration"]]))],
-                                  sat_varlabs = 2003:2018,
+                                  sat_varlabs = paste("day", 60:273),
                                   bar_varlabs = "BS",
                                   proj_final = "ONP",
                                   coord_sub = c(0.6, 0.5, 0.5, 0.7),
@@ -282,11 +289,12 @@ daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
                                   plot_oob = FALSE,
                                   export_plots = "pdf",
                                   plot_opts = c(45, -0.2, 12),
-                                  width=15,
+                                  width=20,
                                   export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Region output")
 ```
 
-An example of what the output may look like (once plotted) can be seen in **Figure 8a** here: [Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings — HBI T<sub>25</sub>", *Quaternary Science Reviews* **523**, 115703](https://doi.org/10.1016/j.epsl.2019.06.038).
+An example of what the output may look like (once plotted) can be seen in **Figure 8a** here: [Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings — HBI T<sub>25</sub>", *Quaternary Science Reviews* **523**, 115703](https://doi.org/10.1016/j.epsl.2019.06.038), and in the roughly formatted point plot exported by `clim_region`:
+![Image7](https://i.ibb.co/0q7FxD4/CLIM-Regional-2019-11-15-20hr-25min-Page-3.png)
 <br></br>
 ### Deriving a record of relative change in Chla
 This can be done using `clim_btrack`. LOESS smoothing is not applied as a pre-processing step in this case, and the McKibben et al. (2012) method is used. The day range is specified to be 60:273 (as before), and differences are calculated between 8-daily averages (set by the `run_window` argument).
