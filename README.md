@@ -535,7 +535,7 @@ multMerge <- function(mypath, use_dt=TRUE, patt="\\.csv$", which.files="all", by
 | **mypath** |A character vector denoting the filepath of files to be merged.|
 | **use_dt** |A TRUE/FALSE logical. When `TRUE` (default), the `data.table` package is used for significantly quicker importing of large files into R.|
 | **patt** |A `grep` pattern to filter the files by name within the target directory. The default value ensures only .csv files are merged.|
-| **arg**| A numeric vector of file IDs (assigned based on their order within `mypath`). Used to further filter the files to be merged. The default value, "all", merges all files detected in `mypath` using `patt`.|
+| **which.files**| A numeric vector of file IDs (assigned based on their order within `mypath`). Used to further filter the files to be merged. The default value, "all", merges all files detected in `mypath` using `patt`.|
 | **by_cols**| A character vector of column names to use for merging. By default, merging is carried out by columns common to all files in `mypath`.|
 | **which.cols**| A character vector of column names to keep in the final output. Defaults to NULL, keeping all columns.|
 
