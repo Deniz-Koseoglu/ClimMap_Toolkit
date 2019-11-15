@@ -17,7 +17,7 @@ The toolkit was previously used to calculate a temporally-averaged climatology, 
 
 Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biomarker-based proxy of the spring phytoplankton bloom in Arctic and sub-arctic settings — HBI T<sub>25</sub>", *Quaternary Science Reviews* **523**, 115703.
 
-**NOTE**: A portfolio of figures and data tables generated via ClimMap Toolkit is available [here]().
+**NOTE**: A vignette showcasing some of the functionality and figures provided by the ClimMap Toolkit is available [here](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md).
 
 The toolkit was tested solely on the Windows 10 operating system as of 11/2019, and is provided as-is under the terms of the MIT licence (see LICENCE.md in the repository root).
 
@@ -91,7 +91,7 @@ opt_down=TRUE, down_mode="wb", dcores=detectCores(), max_retries=6, shared_folde
 | **shared_folder** |An extra option to specify whether SeaWifs or MODIS Aqua data should be downloaded to the same (shared) folder. Defaults to `TRUE`.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions;
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions;
 `clim_download` downloads data to a specified "Data" folder located in the "Climate Data" directory of ClimMap Toolkit. Every repository, variable, and data resolution have a dedicated folder. For example, when ClimMap Toolkit is located at **"D:/Climate Data/"** and the user downloads **monthly northern-hemisphere SIC** data from **NSIDC**, the resulting netCDF files will appear in: **D:/Climate Data/Data/NSIDC/Data/SIC/nh_monthly/**.
 
 #### Values
@@ -135,7 +135,7 @@ calc_sum=FALSE, n_limit=0, mode="summary")
 | **remove_miss** |Should missing values be removed? **Not currently used**, and values marked as missing in the original data are always filtered out.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 The function returns a list containing the `data.frame` of extracted/summarised climatology and/or yearly data (`$yearly_summary`), monthly data (`$monthly_summary`; optional), more visually interpretable/formatted column names (`$clim_pretty_names` and `$clim_pretty_names_monthly`; optional) map projection information (`$projection_info`), and — depending on the type of data processed — a `data.frame` of grid coordinates only (`$coords_total`).
@@ -202,7 +202,7 @@ height=10, point_size=12)
 The following arguments are currently included in the source code but are **WIP** and should not be used as of ClimMap Toolkit version 0.9 (11/2019): `point_data`, `point_vars`, `pie_plot`, `scale_alpha`, `scale_symbol`, `scale_size`, `plot_aes`, `scale_opts`, and `size_lims`.
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 The function returns two lists containing `ggplot2` objects with maps of satellite data and (optionally) point/sample data.
@@ -261,7 +261,7 @@ export_plots="pdf", export_path, height=10, width=10, point_size=12, dpi=500)
 | **dpi** |The Dots Per Inch (DPI) resolution of exported .PNG plots (500 by default).|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions. Note that the arguments `mean_col` and `extra_trends` for `clim_region` are currently **WIP** and may be deprecated.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions. Note that the arguments `mean_col` and `extra_trends` for `clim_region` are currently **WIP** and may be deprecated.
 
 #### Values
 A list containing a `data.frame` with spatially-averaged data and `ggplot2` plots as specified by the user.
@@ -293,7 +293,7 @@ sat_varlabs=NA, separ=",", proj_init="WGS84", proj_orig, rast_res=c(NA, NA, 3), 
 | **export_path** |Character value denoting the directory to which function output is exported.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` of input coordinates and associated variable values (e.g. chlorophyll concentration) determined by the function. 
@@ -320,7 +320,7 @@ coord_vars=c("Longitude", "Latitude"), ex_path=getwd())
 | **ex_path** |Character value denoting the directory to which function output is exported.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` including original input data and phytoplankton biomass (C<sub>phyto</sub>; g C m<sup>-3</sup>) as determined by the function.
@@ -344,7 +344,7 @@ clim_day <- function(lat_data, lat_var="Latitude", long_var="Longitude", day_rng
 | **ex_path** |Character value denoting the directory to which function output is exported.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` with input data and calculated day length (in hours). 
@@ -383,7 +383,7 @@ cons_par=TRUE, div_nums=c(64,1), ex_path=getwd(), res="depth_only")
 | **res** |One of "time_depth" or "depth_only" (default; much less computationally expensive). Determines whether division rate μ (d<sup>-1</sup>) is resolved for time and depth or only the latter, respectively ([Behrenfeld et al., 2017](https://doi.org/10.1038/NGEO2861)).|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A list of `data.frame` objects containing input data and division/growth rates (d<sup>-1</sup>) calculated via the chosen algorithm(s).
@@ -417,7 +417,7 @@ times=c("days", NA), year_val=2009, monthly_aggr=TRUE, export_path=NA, extras=TR
 | **extras** |A TRUE/FALSE logical. If `TRUE` (default), calculates additional parameters from the relative change record, including: maximum and minimum value above 0 (Pos_MAX and Pos_MIN), mean and median value above 0 (Pos_MEAN and Pos_MEDIAN), duration (in number of data points) of values above 0 and their percentage from the total (Pos_DUR and Pos_Dur%); most of these parameters, with the exception of maximum value, are also calculated for values below 0 (Neg_MIN, Neg_MEAN, Neg_MEDIAN, Neg_DUR, Neg_Dur%). Finally, sample size of non-missing values is also calculated (SSize). Parameters calculated from non-smoothed data have the prefix "RAW", while a second set of parameters with the prefix "LOESS" is additionally calculated from LOESS-smoothed data when `smoothing` is `numeric`.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` with timeseries of relative change of the input variable (e.g. in chlorophyll concentration) and additional calculations as specified by the user (e.g. maximum/minimum/mean/median/duration of positive and negative change).
@@ -449,7 +449,7 @@ varlab="chlor_a", export_path, bloom_dur=FALSE, smoothing=NA, smooth_max=NA)
 | **smooth_max** |If numeric between 0 and 1, additionally calculates the input time series maximum (and its time of occurrence) using a "smoothed" approach. For example, assuming input `data` is chlorophyll concentration and `smooth_max=0.03` (default), the number of **consecutive** points within 3% of (and including) the chlorophyll maximum is determined, and the point closest to the arithmetic mean of these is used as the peak bloom value; `smooth_max` is useful for noisy data, where the absolute maximum chlorophyll concentration does not necessarily represent the beginning of a bloom.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 Returns a `data.frame` containing original input data and calculated bloom descriptors (see **Arguments**).
@@ -469,7 +469,7 @@ clim_melt <- function(data)
 | **data** |An R object containing a 4-column `data.frame` of yearly [Melt Season Data](https://neptune.gsfc.nasa.gov/uploads/files/melt_update_2019.zip), e.g. that processed via `clim_summary`.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` with input MSL data and calculated Inner MSL ("Inmelt") and Outer MSL ("Outmelt"), in days. 
@@ -495,7 +495,7 @@ coord_vars = c("Longitude", "Latitude"), time_span)
 | **time_span** |A character vector of length 2 designed to contain the first and last year of input data coverage, which are added to column names for the user's convenience. Otherwise, can take any value.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` with input data and calculated slope (absolute or percentage change per year/decade as specified by the user), *p*-value, and standard error (optional).
@@ -515,7 +515,7 @@ clim_ndate <- function(file_path)
 | **file_path** |A character vector containing the directory path. Filenames where a date in the yyyy-mm-dd format is found will be renamed (e.g. 20020701 changes to 2002182).|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 Returns NULL. The files within the specified directory are renamed.
@@ -540,7 +540,7 @@ multMerge <- function(mypath, use_dt=TRUE, patt="\\.csv$", which.files="all", by
 | **which.cols**| A character vector of column names to keep in the final output. Defaults to NULL, keeping all columns.|
 
 #### Details
-Please refer to the [ClimMap Toolkit vignette]() for *reproducible* usage examples of functions.
+Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
 
 #### Values
 A `data.frame` containing columns from all files merged (e.g. by latitude/longitude coordinates). 
