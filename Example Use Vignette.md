@@ -128,11 +128,11 @@ maplist[["Chla"]] <- clim_plot(core_dir = "D:/ClimMap_Toolkit",
                                export_path = "D:/ClimMap_Toolkit/Example/Example 1/Clim_Plot output")
 ```
 The above `clim_plot` code produces these SIC (left) and Chla (right) maps:
-![Image1](https://ibb.co/gP3wXMM)
-![Image2](https://ibb.co/wQ2SwSQ)
+![Image1](https://i.ibb.co/HxVYMDD/CLIM-Plots-2019-11-14-15hr-31min-35sec.png)
+![Image2](https://i.ibb.co/Ks82L2s/CLIM-Plots-2019-11-14-17hr-32min-11sec.png)
 
 Note that data exported from `clim_summary` may just as easily be plotted using dedicated software, such as [Ocean Data View](https://odv.awi.de), as shown below:
-![Image3](https://ibb.co/t2GkX1Z)
-![Image4](https://ibb.co/cDFQnB1)
+![Image3](https://i.ibb.co/6tMVBqv/SIC-ODV.png)
+![Image4](https://i.ibb.co/MMV70vs/Chla-ODV.png)
 
 ## EXAMPLE 2: Working with daily Chla data
