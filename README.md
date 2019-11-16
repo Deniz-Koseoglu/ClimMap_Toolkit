@@ -36,7 +36,7 @@ The ClimMap Toolkit contains the following functions as of v0.9 (02/11/2019):
 11. `clim_melt` calculates Inner and Outer Melt Season Length (MSL) from the melt season [NOAA data](https://neptune.gsfc.nasa.gov/uploads/files/melt_update_2019.zip) as outlined by [Stroeve et al. (2014)](https://doi.org/10.1002/2013GL058951).
 12. `clim_trend` derives the slope (absolute or percentage) of a least-squares trend from timeseries data (e.g. interannual or daily Sea Ice Concentration, SIC) and optionally calculates the significance (*p*-value) and standard error of the regression.
 13. `clim_ndate` converts dates within filenames from a yyyy-mm-dd to a yyyy-day_of_year format for compatibility with `clim_summary`.
-14. `multMerge` is a helper function that merges all .csv files from a given directory by column(s). 
+14. `multMerge` is a helper function that merges all .csv files from a given directory by column(s). This is an extension of [this function](https://rdrr.io/github/HFBrowning/EnvEpi/man/multMerge.html) based on the [work](https://www.r-bloggers.com/merging-multiple-data-files-into-one-data-frame/) of Tony Cookson.
 
 Other auxiliary functions not used separately include `is.even`, `is.odd`, `get_free_ram`, and `showMemoryUse`.
 
