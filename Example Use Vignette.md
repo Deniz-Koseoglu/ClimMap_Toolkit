@@ -311,12 +311,13 @@ chla_list[["Chla_RelChange"]] <- clim_btrack(data = chla_list[["Chla_Concentrati
 ```
 <br></br>
 ### Calculating bloom descriptors from Chla data
-Finally, `clim_bloom` is used below to calculate bloom start, end, and duration based on both the absolute Chla maximum and the "smoothed" equivalent (see the `smooth_max` argument description).
+Finally, `clim_bloom` is used below to calculate bloom start, end, and duration. The above Chla timeseries shows that high values in September and outliers in March may be erroneously identified as the peak bloom. Thus, the day range was cut down from 60:273 to 75:244 in this case, using the `data` argument.
 
 ```r
-chla_list[["Chla_BloomDesc"]] <- clim_bloom(data = chla_list[["Chla_Concentration"]],
+chla_list[["Chla_BloomDesc"]] <- clim_bloom(data = chla_list[["Chla_Concentration"]][,grep(paste0("Longitude|Latitude|Mean.of|", paste0("days", 75:244, collapse="|")), colnames(chla_list[["Chla_Concentration"]]))],
                                             bloom_dur = TRUE,
-                                            export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Bloom output",
-                                            smooth_max = 0.03)
+                                            export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Bloom output")
 ```
 This is what the bloom duration (in days) map looks like when plotted in Ocean Data View:
+![Image7](https://i.ibb.co/gy56fVC/Default-1.png)
+It is apparent that on the Barents Sea shelf, within and south of the Marginal Ice Zone, bloom duration is significantly shorter overall.
