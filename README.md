@@ -51,7 +51,7 @@ Any missing dependencies should install automatically when first using a given C
 3. Open RStudio and create a new R script via **File -> New File -> R Script**. Alternatively, use the console.
 4. Source the ClimMap Toolkit functions  from the "ClimMap_Toolkit_v09.R" file located in the directory to which the .zip archive was unpacked. For example, assuming the "ClimMap_Toolkit_v09.R" file is located in D:/, the following command may be used:
 ```r
-source("D:/Climate Data/ClimMap_Toolkit_v09.R")
+source("D:/ClimMap_Toolkit/ClimMap_Toolkit_v09.R")
 ```
 You are now ready to use the functions.
 
