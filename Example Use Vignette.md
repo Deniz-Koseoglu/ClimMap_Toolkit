@@ -1,7 +1,7 @@
 # ClimMap Toolkit Vignette
 This example use vignette showcases some of the functionality included in the ClimMap Toolkit, and depends on the user having [downloaded]() and [set up](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit#getting-started) the latest release (currently v0.9) using provided instructions, complete with [dependencies](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit#dependencies). While the toolkit may be unpacked to any directory of your choice, this vignette assumes that the "ClimMap_Toolkit" folder contained in the downloaded .ZIP archive was extracted to **D:/**.
 
-Note that all initial function output presented herein is available in the extracted **"D:/ClimMap_Toolkit/Example/Vignette Outputs"** folder, while the code is summarised in the **"D:/ClimMap_Toolkit/ClimMap_Toolkit_v09_EXAMPLES.R"** file.
+Note that all initial function output presented herein (except individual daily Chla files due to their large size) is available in the extracted **"D:/ClimMap_Toolkit/Example/Vignette Outputs"** folder, while the code is summarised in the **"D:/ClimMap_Toolkit/ClimMap_Toolkit_v09_EXAMPLES.R"** file.
 <br/><br/>
 ## EXAMPLE 1: Working with monthly data
 In this example, [NOAA/NSIDC Sea Ice Concentration (SIC)]() and [MODIS Aqua chlorophyll-*a* (Chla)]() data will be downloaded, summarised to interannual and annual average climatologies, visualised on maps using the Orthographic North Polar (ONP) projection, spatially averaged for various Arctic regions defined by ESRI shapefiles. Finally, SIC and Chla concentrations will be determined for a set of point locations representing surface sediments.
