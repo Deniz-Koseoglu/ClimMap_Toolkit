@@ -22,7 +22,7 @@ Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biom
 The toolkit was tested solely on the Windows 10 operating system as of 11/2019, and is provided as-is under the terms of the MIT licence (see LICENCE.md in the repository root).
 
 # Functionality
-The ClimMap Toolkit contains the following functions as of v0.9 (02/11/2019):
+The ClimMap Toolkit contains the following functions as of v0.9.1 (11/06/2020):
 1. `clim_download` automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables.
 2. `clim_summary` extracts data from downloaded NetCDF4 or HDF files, with or without further calculations (mean, SD, summed/aggregated climatologies, and/or anomalies).
 3. `clim_plot` visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function is a **Work In Progress (WIP)**.
