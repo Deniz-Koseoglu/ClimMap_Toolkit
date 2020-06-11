@@ -19,7 +19,7 @@ Belt, S.T., Smik, L., Köseoğlu, D., Knies, J., Husum, K. (2019), "A novel biom
 
 **NOTE**: A vignette showcasing some of the functionality and figures provided by the ClimMap Toolkit is available [here](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md).
 
-The toolkit was tested solely on the Windows 10 operating system as of 11/2019, and is provided as-is under the terms of the MIT licence (see LICENCE.md in the repository root).
+The toolkit was tested solely on the Windows 10 operating system as of 06/2020, and is provided as-is under the terms of the MIT licence (see LICENCE.md in the repository root).
 
 # Functionality
 The ClimMap Toolkit contains the following functions as of v0.9.1 (11/06/2020):
