@@ -199,7 +199,7 @@ height=10, point_size=12)
 | **point_size** |The point/symbol size of exported .PDF plots. Defaults to 12.|
 
 #### Work In Progress (WIP) arguments
-The following arguments are currently included in the source code but are **WIP** and should not be used as of ClimMap Toolkit version 0.9 (11/2019): `point_data`, `point_vars`, `pie_plot`, `scale_alpha`, `scale_symbol`, `scale_size`, `plot_aes`, `scale_opts`, and `size_lims`.
+The following arguments are currently included in the source code but are **WIP** and should not be used as of ClimMap Toolkit version 0.9.1 (06/2020): `point_data`, `point_vars`, `pie_plot`, `scale_alpha`, `scale_symbol`, `scale_size`, `plot_aes`, `scale_opts`, and `size_lims`.
 
 #### Details
 Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
