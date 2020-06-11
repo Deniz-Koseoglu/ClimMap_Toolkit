@@ -61,7 +61,7 @@ You are now ready to use the functions.
 # Functions
 ### The `clim_download` function
 #### Description
-Automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables.
+Automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables. **NOTE:** Some data repositories require user registration for procurement of a login and password. Currently, users must register with the [Centre for Environmental Data Analysis](https://services.ceda.ac.uk/cedasite/register/info/) to use CRU TS v4.03 data, and with [NASA EarthData](https://urs.earthdata.nasa.gov/users/new) to use MODIS Aqua and SeaWifs data.
 
 #### Usage
 ```r
