@@ -64,9 +64,9 @@ satlist[["Chla"]] <- clim_summary(repository = "SeaWifs_MODISA",
                                   month_rng = 4:5,
                                   subset_order = c("year", "day", ""),
                                   summary_func = "yearly",
-                                  coord_subset = c(30, 90, -180, 180),
+                                  coord_subset = c(40, 90, -180, 180),
                                   export_path = "D:/ClimMap_Toolkit/Example/Example 1/Clim_Summary output",
-                                  big_data = c("D:/ClimMap_Toolkit/Satellite Processing Results/Big Data", 7000, 140000, 3),
+                                  big_data = c("D:/ClimMap_Toolkit/Satellite Processing Results/Big Data", 7000, 1000000, 3),
                                   mode = "summary")[[1]]
 
 
