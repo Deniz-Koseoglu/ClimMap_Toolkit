@@ -472,8 +472,8 @@ if(!any(repository %in% c("CEDA_MO", "TClim", "CRU4")) & any(frequency %in% c("m
   frequency <- "monthly"
 }
 
-if(any(repository %in% c("CEDA_MO", "CRU4", "OC_CCI")) & opt_down==TRUE) {
-  print("CEDA Archive and OC_CCI downloads currently cannot be optimised! Switching to looped downloads...")
+if(any(repository %in% c("CEDA_MO", "CRU4", "OC_CCI", "MODIS_A", "SeaWifs")) & opt_down==TRUE) {
+  print("MODIS, SeaWifs, CEDA Archive and OC_CCI downloads currently cannot be optimised! Switching to looped downloads...")
   opt_down <- FALSE
 }
 
