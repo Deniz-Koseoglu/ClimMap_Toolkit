@@ -548,7 +548,7 @@ A `data.frame` containing columns from all files merged (e.g. by latitude/longit
 
 # Change Log
 ### Version 0.9.1 (06/2020)
-1. Removed `bigmemory` and `bigalgebra` packages from dependencies. 
+1. Removed `bigmemory` and `bigalgebra` packages from dependencies, adding `httr`. 
 2. Updated MODIS Aqua and SeaWifs `clim_download` routines to include the new requirement for Earth Data login credentials.
 
 ### Version 0.9 (11/2019)
