@@ -1,5 +1,5 @@
 # ClimMap Toolkit
-The toolkit includes various functions for downloading, processing (e.g. aggregated/average climatology creation), and visualisation of satellite-derived marine and terrestrial climate data in NetCDF format. Implementation was carried out in [RStudio](https://www.rstudio.com/products/rstudio/download/) (R v3.5.0). The following repositories are supported as of version 0.9.1 (released 06/2020): 
+The toolkit includes various functions for downloading and processing (e.g. aggregated/average climatology creation) of satellite-derived marine and terrestrial climate data in (primarily) the NetCDF format. Implementation was carried out in [RStudio](https://www.rstudio.com/products/rstudio/download/) (R version ≥3.5.0). The following repositories are supported as of version 0.9.1 (released 06/2020): 
 
 #### Marine Datasets
 1. [National Snow and Ice Data Centre (NSIDC)](https://nsidc.org), including [Sea Ice Index](https://nsidc.org/data/seaice_index/archives) and [NOAA/NSIDC Sea Ice Concentration](https://nsidc.org/data/g02202).
@@ -25,18 +25,17 @@ The toolkit was tested solely on the Windows 10 operating system as of 06/2020, 
 The ClimMap Toolkit contains the following functions as of v0.9.1 (11/06/2020):
 1. `clim_download` automatically downloads files from various HTTP, THREDDS, or FTP repositories according to the chosen temporal range (month and/or year) and desired variables.
 2. `clim_summary` extracts data from downloaded NetCDF4 or HDF files, with or without further calculations (mean, SD, summed/aggregated climatologies, and/or anomalies).
-3. `clim_plot` visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function is a **Work In Progress (WIP)**.
-4. `clim_region` spatially aggregates extracted/summarised data from any .csv via ESRI shapefiles.
-5. `clim_locate` determines values of extracted/summarised satellite data at any number of point locations.
-6. `clim_cphyto` calculates phytoplankton biomass from particulate backscattering coefficient (b<sub>bp</sub>) data according to linear calibrations of [Behrenfeld et al., (2005)](https://doi.org/10.1029/2004GB002299), [Graff et al. (2016)](https://doi.org/10.3354/meps11539), or any custom linear regression function.
-7. `clim_day` calculates theoretical day length as a function of latitude and day of year according to [Kirk et al., 2010](https://doi.org/10.1017/CBO9781139168212) and based on the C implementation [here](http://orca.science.oregonstate.edu/faq01.php).
-8. `clim_divrate` models phytoplankton division/growth rates from satellite and model data according to [Behrenfeld et al. (2005)](https://doi.org/10.1029/2004GB002299) and/or [Behrenfeld et al. (2016](https://doi.org/10.1038/NCLIMATE2838), [2017)](https://doi.org/10.1038/NGEO2861).
-9. `clim_btrack` calculates a record of relative change from a time series (e.g. daily/8-daily chlorophyll concentration or phytoplankton biomass) using various methods ([Behrenfeld et al., 2017](https://doi.org/10.1038/NGEO2861); [McKibben et al., 2012](https://doi.org/10.1029/2012JC008114)).
-10. `clim_bloom` detects bloom start/end dates, duration ([Hopkins et al., 2015](https://doi.org/10.1002/2014GB004919)), intensity, magnitude ([Friedland et al., 2018](https://doi.org/10.1111/geb.12717)), and relative contribution to the summed timeseries. Works best with daily chlorophyll concentration timeseries characterised by a pronounced spring bloom peak (e.g. in the Barents Sea and other Arctic shelf areas).
-11. `clim_melt` calculates Inner and Outer Melt Season Length (MSL) from the melt season [NOAA data](https://neptune.gsfc.nasa.gov/uploads/files/melt_update_2019.zip) as outlined by [Stroeve et al. (2014)](https://doi.org/10.1002/2013GL058951).
-12. `clim_trend` derives the slope (absolute or percentage) of a least-squares trend from timeseries data (e.g. interannual or daily Sea Ice Concentration, SIC) and optionally calculates the significance (*p*-value) and standard error of the regression.
-13. `clim_ndate` converts dates within filenames from a yyyy-mm-dd to a yyyy-day_of_year format for compatibility with `clim_summary`.
-14. `multMerge` is a helper function that merges all .csv files from a given directory by column(s). This is an extension of [this function](https://rdrr.io/github/HFBrowning/EnvEpi/man/multMerge.html) based on the [work](https://www.r-bloggers.com/merging-multiple-data-files-into-one-data-frame/) of Tony Cookson.
+3. `clim_region` spatially aggregates extracted/summarised data from any .csv via ESRI shapefiles.
+4. `clim_locate` determines values of extracted/summarised satellite data at any number of point locations.
+5. `clim_cphyto` calculates phytoplankton biomass from particulate backscattering coefficient (b<sub>bp</sub>) data according to linear calibrations of [Behrenfeld et al., (2005)](https://doi.org/10.1029/2004GB002299), [Graff et al. (2016)](https://doi.org/10.3354/meps11539), or any custom linear regression function.
+6. `clim_day` calculates theoretical day length as a function of latitude and day of year according to [Kirk et al., 2010](https://doi.org/10.1017/CBO9781139168212) and based on the C implementation [here](http://orca.science.oregonstate.edu/faq01.php).
+7. `clim_divrate` models phytoplankton division/growth rates from satellite and model data according to [Behrenfeld et al. (2005)](https://doi.org/10.1029/2004GB002299) and/or [Behrenfeld et al. (2016](https://doi.org/10.1038/NCLIMATE2838), [2017)](https://doi.org/10.1038/NGEO2861).
+8. `clim_btrack` calculates a record of relative change from a time series (e.g. daily/8-daily chlorophyll concentration or phytoplankton biomass) using various methods ([Behrenfeld et al., 2017](https://doi.org/10.1038/NGEO2861); [McKibben et al., 2012](https://doi.org/10.1029/2012JC008114)).
+9. `clim_bloom` detects bloom start/end dates, duration ([Hopkins et al., 2015](https://doi.org/10.1002/2014GB004919)), intensity, magnitude ([Friedland et al., 2018](https://doi.org/10.1111/geb.12717)), and relative contribution to the summed timeseries. Works best with daily chlorophyll concentration timeseries characterised by a pronounced spring bloom peak (e.g. in the Barents Sea and other Arctic shelf areas).
+10. `clim_melt` calculates Inner and Outer Melt Season Length (MSL) from the melt season [NOAA data](https://neptune.gsfc.nasa.gov/uploads/files/melt_update_2019.zip) as outlined by [Stroeve et al. (2014)](https://doi.org/10.1002/2013GL058951).
+11. `clim_trend` derives the slope (absolute or percentage) of a least-squares trend from timeseries data (e.g. interannual or daily Sea Ice Concentration, SIC) and optionally calculates the significance (*p*-value) and standard error of the regression.
+12. `clim_ndate` converts dates within filenames from a yyyy-mm-dd to a yyyy-day_of_year format for compatibility with `clim_summary`.
+13. `multMerge` is a helper function that merges all .csv files from a given directory by column(s). This is an extension of [this function](https://rdrr.io/github/HFBrowning/EnvEpi/man/multMerge.html) based on the [work](https://www.r-bloggers.com/merging-multiple-data-files-into-one-data-frame/) of Tony Cookson.
 
 Other auxiliary functions not used separately include `is.even`, `is.odd`, `get_free_ram`, and `showMemoryUse`.
 
@@ -47,7 +46,7 @@ Any missing dependencies should install automatically when first using a given C
 
 # Getting started
 1. Install both [R](https://cran.r-project.org/mirrors.html) and [RStudio](https://www.rstudio.com/products/rstudio/download/).
-2. Download the latest ClimMap Toolkit release from [this link](https://drive.google.com/uc?export=download&id=1-GBg-tCJNl7Ros3IarkY-odjsUKB5Vi9) and unpack the .ZIP archive into a directory of your choice. Examples herein use **D:/** as a directory. Note that the repository only contains the [source code](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091.R) and [example vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v09_EXAMPLES.R) .R files!
+2. Download the latest ClimMap Toolkit release from [this link](https://drive.google.com/uc?export=download&id=1-GBg-tCJNl7Ros3IarkY-odjsUKB5Vi9) and unpack the .ZIP archive into a directory of your choice. Examples herein use **D:/** as a directory. Note that the repository only contains the [source code](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091.R) and [example vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091_EXAMPLES.R) .R files!
 3. Open RStudio and create a new R script via **File -> New File -> R Script**. Alternatively, use the console.
 4. Source the ClimMap Toolkit functions  from the "ClimMap_Toolkit_v091.R" file located in the directory to which the .zip archive was unpacked. For example, assuming the "ClimMap_Toolkit_v091.R" file is located in D:/, the following command may be used:
 ```r
@@ -139,73 +138,6 @@ Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu
 
 #### Values
 The function returns a list containing the `data.frame` of extracted/summarised climatology and/or yearly data (`$yearly_summary`), monthly data (`$monthly_summary`; optional), more visually interpretable/formatted column names (`$clim_pretty_names` and `$clim_pretty_names_monthly`; optional) map projection information (`$projection_info`), and — depending on the type of data processed — a `data.frame` of grid coordinates only (`$coords_total`).
-<br/><br/>
-### The `clim_plot` function
-#### Description
-Visualises the data created with `clim_summary` (or that from any suitable .csv file). Please **note** that this function is a **Work In Progress (WIP)** and is not feature-complete.
-
-#### Usage
-```r
-clim_plot <- function(core_dir = getwd(), sat_data, point_data=NA, point_vars=NA, 
-plot_aes = list(c("fill", "size"), NULL), pie_plot=c(FALSE, 1, 0.005), separ = ",", 
-coord_vars = c("Longitude", "Latitude"), sat_vars, sat_varlabs=sat_vars, scale_alpha=c(0.3, 1), 
-scale_symbol=c(21:25), scale_size="default", sat_sub = list(NULL, "transparent"), 
-sat_rasterize = TRUE, rast_res = c(NA, NA, 3), rast_type = "raster", sat_contours=NULL, 
-satcont_type = c("lines",  1, 1.2), plot_cols=rep(list("default"),10), proj_orig, 
-proj_init="WGS84", proj_final, bathy_res="none", bathy_contours=NULL, coast_res=c("low", "ifb"), 
-bathy_sub = c(-6000:0), coord_sub=NULL, sat_values = "default", sat_breaks="default", 
-break_num=5, sat_lims="default", scale_opts=c(0, 3, FALSE, FALSE), size_lims = c("default", FALSE), 
-leg_labs=waiver(), x_lab="Longitude", y_lab="Latitude", grat=list("WGS84", seq(0, 360, 20), 
-seq(0, 90, 10), "grey15", 1, 0.7), export_results="all", print_plots="all", export_path, width=10, 
-height=10, point_size=12)
-```
-
-#### Feature-complete arguments
-| Argument | Description |
-| ------------- |-------------|
-| **core_dir** |Character directory path where ClimMap Toolkit is located (e.g. "D:/Climate Data").|
-| **sat_data** |Character filepath to satellite data for plotting, or an equivalent R `data.frame` object.|
-| **separ** |The separator value used for `sat_data`. Defaults to `","` for .csv files.|
-| **coord_vars** |Character vector of length 2 with column names corresponding to x and y coordinates. Defaults to `c("Longitude", "Latitude")`.|
-| **sat_vars** |Character vector of satellite data variable column names. Identifies variables to be plotted as individual maps.|
-| **sat_varlabs** |An optional character vector of labels for `sat_vars` (has to be of equal length). Uses `sat_data` column names by default.|
-| **sat_sub** |A list of length 2, where the **first element** is a numeric vector specifying the range of values to remove from plotted `sat_data`, and the **second element** provides the format of such data (the default value, `"transparent"`, renders values in `sat_sub[[1]]` invisible).|
-| **sat_rasterize** |TRUE/FALSE logical. Should `sat_data` be converted to a `raster`? `TRUE` by default; when `FALSE`, `sat_data` is plotted as individual points, which is much more computationally-expensive and prevents `sat_contours` from working properly.|
-| **rast_res** |A vector of length 3 containing horizontal and vertical raster resolution for `sat_data` (in `proj_final`), and the number of decimal places to which the coordinates are rounded (3 by default).|
-| **rast_type** |Character. Determines the `sat_data` mapping type. One of: "raster" (default) or "tile". The latter is more computationally-expensive and only serves as an alternative in case `sat_rasterize` fails to rasterize the data.|
-| **sat_contours** |A numeric vector of values for which to plot contours.|
-| **satcont_type** |A vector of length 3, where the **first element** is one of: "filled" (polygons), "lines" (polylines), or "none"; the **second** and **third** elements are numeric and control the linetype (available values listed [here](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/)) and line width, respectively.|
-| **proj_orig** |The original projection of `sat_data` provided by the source repository (e.g. NSIDC). A character value either containing a `proj4` string or one of the preset projections: "ONP" (Orthographic North Polar), "LANP" (Lambert Azimuthal Equal Area North Polar; EPSG 3408), "SNP" (Stereographic North Polar; EPSG 3411 or 3413 for a specific datum), "AENP" (Azimuthal Equidistant North Polar), "OSP" (Orthographic South Polar), "SSP" (Stereographic South Polar; EPSG 3031), "SSP_alt" (alternative Stereographic South Polar), "LASP" (Lambert Azimuthal Equal Area South Polar), "WGS84" (standard WGS84 ellipsoid world projection; EPSG 4326).|
-| **proj_init** |The projection of `sat_data` at the time of import.|
-| **proj_final** |The final projection of to plot `sat_data` in. The options are identical to those of `proj_orig` and `proj_init`.|
-| **bathy_res** |Character controlling optional plotting of bathymetry. One of: "none", "ETOPO_4min", "ETOPO_6min", "ETOPO_8min", "ETOPO_10min". Note that bathymetry is currently **not available** when `proj_init` or `proj_final` is "SNP" or "SSP" (or another stereographic polar projection).|
-| **bathy_contours** |A numeric vector providing bathymetry contours to be plotted when `bathy_res!="none"`, e.g. `bathy_contours=c(-200, -500, -1250)` will plot contours at depths of 200, 500, and 1250m.|
-| **coast_res** |Character vector of length 2, where the **first element** denotes the resolution of coastlines to be plotted and is one of: "none", "crude", "low" (default), "medium", "high", "full". The **second element** controls the plotting of Antarctica separately and is one of: "none", "ifb" (ice front boundary-based coastlines), or "gl" (grounding line-based coastlines).|
-| **bathy_sub** |A numeric vector of depths (m) to plot when `bathy_res!="none"`, e.g. `bathy_sub=c(-1000:0)` will only plot depths between 1000 and 0m.|
-| **coord_sub** |Numeric vector of length 4 specifying the degree of zooming in plotted `sat_data` maps in the format: `c(left-right x-coordinate zoom, right-left x-coordinate zoom, upper-lower y-coordinate zoom, lower-upper y-coordinate zoom)`. For example `coord_sub=c(0.6, 0.6, 0.6, 0.6)` display 0.6 (i.e. 60%) of the maximum coordinate range on each side of the plotted map(s).|
-| **sat_values** |A numeric vector of `sat_data` values to plot in the **map legend**, in the format `c(minimum value, maximum value, value interval)`; for instance, `c(20, 100, 1)` when analysing NSIDC SIC data plots sea ice concentrations from 20-100% with an interval of 1%. Only works when `bathy_res="none"` (i.e. bathymetry is not plotted). The default follows standard `ggplot2` routines.|
-| **sat_breaks** |A numeric vector of `sat_data` value breaks to display in the legend. Only works when `bathy_res="none"` (i.e. bathymetry is not plotted). The default follows standard `ggplot2` routines.|
-| **sat_lims** |A numeric vector of length 2 specifying the range of `sat_data` values to plot, e.g. `c(0, 100)`. Only works when `bathy_res="none"` (i.e. bathymetry is not plotted). The default follows standard `ggplot2` routines.|
-| **leg_labs** |A character vector of length 3, where the **first** and **second** elements denote the legend labels for `sat_data` and associated contours. The **third element** is not currently in use.|
-| **x_lab** |The x-axis label for plotted maps (e.g. "Longitude").|
-| **y_lab** |The y-axis label for plotted maps (e.g. "Latitude").|
-| **grat** |A list of maximum length 7 specifying whether graticules are plotted, and their aesthetic. The **first element** is one of: "none", "WGS84", "Distance" for no graticules, latitude/longitude graticules, or "distance" (i.e. planar) graticules. The **second** and **third** elements are numeric vectors of length 3 and adjusting x- and y-coordinate resolution, respectively, in the format: `c(minimum coordinate, maximum coordinate, coordinate step/interval)`. The **fourth element** specifies graticule colour (e.g. `"grey15"` by default). The **fifth**, **sixth**, and **seventh** elements denote linetype, line width, and tick number (when graticule type is `"Distance"`). **NOTE**: If a list of length<7 is provided, default values are used for unspecified aesthetics.|
-| **plot_cols** |A list of length 10 that specifies the colour palettes used for maps. The **first**, **third**, and **seventh** elements are multi-colour palettes (length>1) specifying, respectively, the `sat_data`, ocean bathymetry, and contour colour palettes, respectively. The following preset colour palettes are available: "SIC", "SIC_heat", "SIC_anom", "MODIS", "ODV", "ODV_bathy", "Alter_bathy", "RYG", and "Melt_Trend". Elements **four to six** are single colours (length=1) controlling the colours of ocean fill, land fill, and coastlines, respectively. The **second** and **eighth to tenth** elements are not currently in use.|
-| **export_results** |Character specifying the type of results to export. One of: "all" or "plots" (the latter forgoes exporting contours specified by `sat_contours`).|
-| **print_plots** |Character specifying the type of plots to display in R. One of: "none", "sat" (satellite grids), "point" (sample locations from `point_data`, **WIP**!), "all".|
-| **export_path** |Character value denoting the directory to which function output is exported.|
-| **width** |The numeric value for width of exported .PDF plots. Defaults to 10.|
-| **height** |The numeric value for height of exported .PDF plots. Defaults to 10.|
-| **point_size** |The point/symbol size of exported .PDF plots. Defaults to 12.|
-
-#### Work In Progress (WIP) arguments
-The following arguments are currently included in the source code but are **WIP** and should not be used as of ClimMap Toolkit version 0.9.1 (06/2020): `point_data`, `point_vars`, `pie_plot`, `scale_alpha`, `scale_symbol`, `scale_size`, `plot_aes`, `scale_opts`, and `size_lims`.
-
-#### Details
-Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/Example%20Use%20Vignette.md) for *reproducible* usage examples of functions.
-
-#### Values
-The function returns two lists containing `ggplot2` objects with maps of satellite data and (optionally) point/sample data.
 <br/><br/>
 ### The `clim_region` function
 #### Description
