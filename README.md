@@ -374,7 +374,7 @@ cons_par=TRUE, div_nums=c(64,1), ex_path=getwd(), res="depth_only")
 | **mld** |Character filepath of R `data.frame` containing Mixed Layer Depth (MLD) data (m).|
 | **aph** |Character filepath of R `data.frame` containing absorption coefficients for phytoplankton (a<sub>ph</sub>) at 443 nm (m<sup>-1</sup>).|
 | **q_val** |The *Q<sub>10</sub>* value used to estimate the chlorophyll-specific light-saturated rate of photosynthesis from an exponential relationship with `sst` ([Eppley, 1972](https://spo.nmfs.noaa.gov/sites/default/files/pdf-content/1972/704/eppley.pdf)).|
-| **method** |Which method to use for division/growth rate estimation? Any of "BH05" ([(Behrenfeld et al., 2005)](https://doi.org/10.1029/2004GB002299) and/or "BH17" ([(Behrenfeld et al., 2017)](https://doi.org/10.1038/NGEO2861).|
+| **method** |Which method to use for division/growth rate estimation? Any of "BH05" [(Behrenfeld et al., 2005)](https://doi.org/10.1029/2004GB002299) and/or "BH17" [(Behrenfeld et al., 2017)](https://doi.org/10.1038/NGEO2861).|
 | **chl_c** |Determines the method used to estimate the chlorophyll/C<sub>phyto</sub> ratio. One of "sat" (satellite chlorophyll), "aph_ratio" (CbPM model), or "BH16" (the model of Behrenfeld et al., 2016).|
 | **coord_vars** |A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **cons_par** |If `TRUE`, ensures that the integral of iPAR throughout the day length (`dayl`), which is used to calculate division rate μ (d<sup>-1</sup>) when `method="BH17"`, is equal to the daily integrated PAR value (`par`). Otherwise, `ipar` is assumed to represent maximum PAR at solar noon.|
