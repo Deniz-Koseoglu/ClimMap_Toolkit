@@ -316,7 +316,7 @@ coord_vars=c("Longitude", "Latitude"), ex_path=getwd())
 | **slp** |Optional numeric value of the regression slope.|
 | **incpt** |Optional numeric value of the y-intercept.|
 | **bkgrd** |Optional numeric value of background b<sub>bp</sub>.|
-| **coord_vars** |A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
+| **coord_vars** |A character vector of column names containing coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **ex_path** |Character value denoting the directory to which function output is exported.|
 
 #### Details
@@ -376,7 +376,7 @@ cons_par=TRUE, div_nums=c(64,1), ex_path=getwd(), res="depth_only")
 | **q_val** |The *Q<sub>10</sub>* value used to estimate the chlorophyll-specific light-saturated rate of photosynthesis from an exponential relationship with `sst` ([Eppley, 1972](https://spo.nmfs.noaa.gov/sites/default/files/pdf-content/1972/704/eppley.pdf)).|
 | **method** |Which method to use for division/growth rate estimation? Any of "BH05" [(Behrenfeld et al., 2005)](https://doi.org/10.1029/2004GB002299) and/or "BH17" [(Behrenfeld et al., 2017)](https://doi.org/10.1038/NGEO2861).|
 | **chl_c** |Determines the method used to estimate the chlorophyll/C<sub>phyto</sub> ratio. One of "sat" (satellite chlorophyll), "aph_ratio" (CbPM model), or "BH16" (the model of Behrenfeld et al., 2016).|
-| **coord_vars** |A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
+| **coord_vars** |A character vector of column names containing coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **cons_par** |If `TRUE`, ensures that the integral of iPAR throughout the day length (`dayl`), which is used to calculate division rate μ (d<sup>-1</sup>) when `method="BH17"`, is equal to the daily integrated PAR value (`par`). Otherwise, `ipar` is assumed to represent maximum PAR at solar noon.|
 | **div_nums** |Numeric vector of length 2. When `method="BH17"` and `res="time_depth"`, the first and second elements denote the number of time steps throughout day length (`dayl`) and the interval between MLD (`mld`) used for the double integration, respectively. Defaults to `c(64, 1)`.|
 | **ex_path** |Character value denoting the directory to which function output is exported.|
@@ -404,7 +404,7 @@ times=c("days", NA), year_val=2009, monthly_aggr=TRUE, export_path=NA, extras=TR
 | ------------- |-------------|
 | **data** |Character filepath or R `data.frame` containing data (e.g. chlorophyll concentration) from which to derive a relative change record.|
 | **sat_vars** |Character column names of daily-resolution satellite data variables to use.|
-| **coord_vars** |A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
+| **coord_vars** |A character vector of column names containing coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **run_window** |A numeric value denoting the number of data points (e.g. daily satellite data values) averaged before calculating relative change between them. Defaults to 8 (i.e. relative change is calculated between averages of 8 data points, and a constant time step of 1 data point).|
 | **mean_fun** |A character vector of length 2. Determines the type of averaging technique used when calculating relative change (first element) and aggregating by month when `monthly_aggr=TRUE` (second element). One of "arithm" and/or "geo" for arithmetic and geometric mean, respectively.|
 | **var_lab** |A character value used to identify the satellite data variable processed. Added to output column names for user convenience. If equal to `"default"`, attemps to identify the variable name automatically under the assumption that data was summarised via `clim_summary`. If `NA`, defaults to "ArbitraryVar".|
@@ -437,7 +437,7 @@ varlab="chlor_a", export_path, bloom_dur=FALSE, smoothing=NA, smooth_max=NA)
 | Argument | Description |
 | ------------- |-------------|
 | **data** |Character filepath or R `data.frame` containing time series of data (e.g. daily-resolution chlorophyll concentration) from which to derive bloom descriptors.|
-| **coord_vars** |A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
+| **coord_vars** |A character vector of column names containing coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **consec_num** |The number of consecutive data points (2 by default) below the set threshold, required to identify bloom start and end dates (see [Hopkins et al., 2015](https://doi.org/10.1002/2014GB004919)).|
 | **thres_percent** |A numeric value between 0 and 1 that denotes the fraction of the difference between maximum and minimum input values (e.g. chlorophyll) which is used to determine the bloom start/end threshold as per [Hopkins et al. (2015)](https://doi.org/10.1002/2014GB004919). Defaults to 0.05.|
 | **thres_num** |A numeric value equal to either 1 or 2. If **1**, a single minimum value-based threshold (dependent on `thres_percent`) is calculated from the entire time series of input data, and used to determine both bloom start and end dates. If **2** (default), two separate thresholds are calculated before the time series maximum (used to determine bloom start time), and after (used to determine bloom termination/end) as per [Hopkins et al. (2015)](https://doi.org/10.1002/2014GB004919).|
@@ -491,7 +491,7 @@ coord_vars = c("Longitude", "Latitude"), time_span)
 | **trend_vars** |A character vector of column names to use for least-squares regression.|
 | **trend_unit**|The format to use for calculated least-squares slopes. The default value leaves the slope unaltered; `"decade"` multiplies the slope by 10, providing a decadal trend assuming input data is yearly; `"%"` normalises the slope to the mean value; `"% decade"` additionally multiplies the slope by 10, yielding a decadal trend of relative change.|
 | **add_stats**|A TRUE/FALSE logical determining whether standard error and *p*-value are calculated for each regression (`TRUE` by default; switch to `FALSE` to considerably accelerate function execution).|
-| **coord_vars**|A character vector of column names containing latitude and longitude coordinates. Defaults to `c("Longitude", "Latitude")`.|
+| **coord_vars**|A character vector of column names containing coordinates. Defaults to `c("Longitude", "Latitude")`.|
 | **time_span** |A character vector of length 2 designed to contain the first and last year of input data coverage, which are added to column names for the user's convenience. Otherwise, can take any value.|
 
 #### Details
