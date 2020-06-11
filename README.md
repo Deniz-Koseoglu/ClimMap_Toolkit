@@ -545,3 +545,11 @@ Please refer to the [ClimMap Toolkit vignette](https://github.com/Deniz-Koseoglu
 #### Values
 A `data.frame` containing columns from all files merged (e.g. by latitude/longitude coordinates). 
 <br/><br/>
+
+# Change Log
+### Version 0.9.1 (06/2020)
+1. Removed `bigmemory` and `bigalgebra` packages from dependencies. 
+2. Updated MODIS Aqua and SeaWifs `clim_download` routines to include the new requirement for Earth Data login credentials.
+
+### Version 0.9 (11/2019)
+Initial release
