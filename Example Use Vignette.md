@@ -11,9 +11,9 @@ We will download data via `clim_download` as follows:
 
 ```r
 #Make sure you have sourced the ClimMap_Toolkit functions!
-source("D:/ClimMap_Toolkit/ClimMap_Toolkit_v09.R")
+source("D:/ClimMap_Toolkit/ClimMap_Toolkit_v091.R")
 
-#SIC data
+#SIC data (no security credentials required)
 clim_download(repository = "NSIDC",
               hemisphere = "north",
               frequency = "monthly",
@@ -24,20 +24,25 @@ clim_download(repository = "NSIDC",
               suppr_msgs = TRUE,
               opt_down = TRUE)
 
-#Chla data
+#Chla data (Note Earth Data Login information required!)
 clim_download(repository = "MODIS_A",
               frequency = "monthly",
               data_type = "Chla",
               year = 2003:2018,
               month = "all",
               res_path = "D:/ClimMap_Toolkit",
+              usrname="dckoseoglu",
+              pword="Example_Pword01",
               suppr_msgs = TRUE,
-              opt_down = TRUE,
+              opt_down = FALSE,
               shared_folder = TRUE)
 
 ```
 
 The files should appear in **D:/ClimMap_Toolkit/Data/NSIDC/Data/SIC/nh_monthly** (SIC) and **D:/ClimMap_Toolkit/Data/SeaWifs_MODISA/Data/Chla/monthly** (Chla).
+
+**NOTE:** As MODIS Aqua and SeaWifs data now require Earth Data user login, `usrname` and `pword` arguments containing the user name and password are now utilised in the second example for downloading chlorophyll (Chla) data. While working example credentials are provided here, please [register on Earth Data](https://urs.earthdata.nasa.gov/users/new) and use your own whenever possible.
+
 <br/><br/>
 ### Creating average climatologies
 We will derive April-June (i.e. "spring") SIC and April-May Chla climatologies using `clim_summary` using downloaded data. First, the SIC data, which is summarised for the period of 1988-2018 and months 4-6 (i.e. April-June). Since we also want the annual mean for each year, we specify `summary_func` to be `"yearly"`. The argument `var_names` specifies only the mean SIC values to work with, and ignores their SDs included in the netCDF files. The .CSV output can be checked at the `export_path` directory, and the climatology is also assigned as a `satlist` element named `"SIC_north"`.
