@@ -81,8 +81,8 @@ opt_down=TRUE, down_mode="wb", dcores=detectCores(), max_retries=6, shared_folde
 | **year** |A numeric vector of years for which to download data.|
 | **month** |A numeric vector between 1 and 12, or character vector (any of "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec") denoting months for which to download data. A value of "all" downloads every month of available data included in `year`.|
 | **res_path** |Character directory path where ClimMap Toolkit is located (e.g. "D:/Climate Data").|
-| **usrname** |Username (character), required when `repository` is one of: `"CEDA_MO"` or `"OC_CCI"`.|
-| **pword** |Password (character), required when `repository` is one of: `"CEDA_MO"` or `"OC_CCI"`.|
+| **usrname** |Username (character), required when `repository` is one of: `"CEDA_MO"`, `"OC_CCI"`, `"MODIS_A"`, or `"SeaWifs"`.|
+| **pword** |Password (character), required when `repository` is one of: `"CEDA_MO"`, `"OC_CCI"`, `"MODIS_A"`, or `"SeaWifs"`.|
 | **suppr_msgs** |A TRUE/FALSE logical. Suppresses user updates when downloading files (`TRUE` by default).|
 | **opt_down** |A TRUE/FALSE logical. Should multi-threaded (parallelised) downloading be used? Significantly speeds up execution by downloading multiple files simultaneously.|
 | **down_mode** |File writing mode. One of: "wb" (default), "w", "a", "ab". See `?download.file` for more information.|
