@@ -70,58 +70,8 @@ satlist[["Chla"]] <- clim_summary(repository = "SeaWifs_MODISA",
                                   mode = "summary")[[1]]
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#STEP 3: Map Arctic SIC and Chla data for April-June and April-May, respectively
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Determine the name of SIC/Chla columns containing interannual average values (this is what we want to plot!)
-meancol_SIC <- colnames(satlist[[1]])[grep("Mean.of.*1988.2018", colnames(satlist[[1]]))]
-meancol_Chla <- colnames(satlist[[2]])[grep("Mean.of.*2003.2018", colnames(satlist[[2]]))]
-
-#Create list to store Clim_Plot output within the R environment
-maplist <- list()
-
-#Visualize April-June (1988-2018) SIC data
-maplist[["SIC"]] <- clim_plot(core_dir = "D:/ClimMap_Toolkit",
-                              sat_data = satlist[[1]],
-                              coord_vars = c("Longitude", "Latitude"),
-                              sat_vars = meancol_SIC,
-                              sat_varlabs = "Mean of April-June SIC (1988-2018)",
-                              sat_contours = c(1, 15, 50),
-                              sat_breaks = seq(0, 100, 20),
-                              sat_lims = c(0, 100),
-                              proj_orig = "SNP",
-                              proj_final = "ONP",
-                              leg_labs = c("SIC (%)", "Contours"),
-                              sat_sub = c(0, "transparent"),
-                              grat = list("none", seq(0, 360, 20), seq(0, 90, 10), "grey15", 1, 0.7),
-                              coord_sub = c(0.6, 0.5, 0.5, 0.7),
-                              export_results = "plots",
-                              print_plots = "none",
-                              export_path = "D:/ClimMap_Toolkit/Example/Example 1/Clim_Plot output")
-
-#Visualize April-May (2003-2018) Chla data
-maplist[["Chla"]] <- clim_plot(core_dir = "D:/ClimMap_Toolkit",
-                               sat_data = satlist[[2]],
-                               coord_vars = c("Longitude", "Latitude"),
-                               sat_vars = meancol_Chla,
-                               plot_cols = "MODIS",
-                               sat_varlabs = "Mean of April-May Chla (2003-2018)",
-                               sat_contours = NULL,
-                               sat_lims = c(0, 10),
-                               sat_breaks = seq(0, 10, 2),
-                               sat_values = "IQR",
-                               proj_orig = "WGS84",
-                               proj_final = "ONP",
-                               leg_labs = c("Chla (mg/m^3)", "Contours"),
-                               grat = list("none", seq(0, 360, 20), seq(0, 90, 10), "grey15", 1, 0.7),
-                               coord_sub = c(0.6, 0.5, 0.5, 0.7),
-                               export_results = "plots",
-                               print_plots = "none",
-                               export_path = "D:/ClimMap_Toolkit/Example/Example 1/Clim_Plot output")
-
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#STEP 4: Spatially aggregate data and derive record low and high values from annual averages
+#STEP 3: Spatially aggregate data and derive record low and high values from annual averages
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Creating a list to store data
 climreg_list <- list()
@@ -167,7 +117,7 @@ climreg_list[["Chla"]] <- clim_region(core_dir = "D:/ClimMap_Toolkit",
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#STEP 5: Determine values of SIC and Chla data at specific point locations (representing surface sediment sampling sites in this case)
+#STEP 4: Determine values of SIC and Chla data at specific point locations (representing surface sediment sampling sites in this case)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #SIC data
 clim_locate(sat_data = satlist[[1]],
@@ -242,16 +192,18 @@ fwrite(chla_list[["Chla_Concentration"]], file = "D:/ClimMap_Toolkit/Example/Exa
 rm(chla_meta)
 rm(chla_vars)
 
+#chla_list[["Chla_Concentration"]] <- data.table::fread("D:/ClimMap_Toolkit/Example/Vignette Outputs/Example 2/Clim_Summary output/Final Aggregate/DAILY_Chla_mgm3_2003-2018.csv", data.table = FALSE)
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #STEP 4: Spatially aggregate daily Chla data for the Barents Sea
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
                                   poly_path = "D:/ClimMap_Toolkit/Mapping/regions/AO_MASIE",
-                                  poly_list = "Barents_Sea",
+                                  poly_list = c("Barents_Sea", "Bering_Sea_IHO", "Chukchi_Sea"),
                                   sat_data = chla_list[["Chla_Concentration"]],
                                   sat_vars = colnames(chla_list[["Chla_Concentration"]])[-grep("Longitude|Latitude|SD.of", colnames(chla_list[["Chla_Concentration"]]))],
                                   sat_varlabs = paste("day", 60:273),
-                                  bar_varlabs = "BS",
+                                  bar_varlabs = c("BS", "BerS", "CS"),
                                   proj_final = "ONP",
                                   coord_sub = c(0.6, 0.5, 0.5, 0.7),
                                   plot_type = "point",
@@ -260,7 +212,7 @@ daily_chla_climreg <- clim_region(core_dir = "D:/ClimMap_Toolkit",
                                   print_plots = FALSE,
                                   plot_oob = FALSE,
                                   export_plots = "pdf",
-                                  plot_opts = c(45, -0.2, 12),
+                                  plot_opts = c(45, -0.2, 9),
                                   width=20,
                                   export_path = "D:/ClimMap_Toolkit/Example/Example 2/Clim_Region output")
 
