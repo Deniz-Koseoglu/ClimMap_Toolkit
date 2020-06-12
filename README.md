@@ -46,7 +46,7 @@ Any missing dependencies should install automatically when first using a given C
 
 # Getting started
 1. Install both [R](https://cran.r-project.org/mirrors.html) and [RStudio](https://www.rstudio.com/products/rstudio/download/).
-2. Download the latest ClimMap Toolkit release from [this link](https://drive.google.com/uc?export=download&id=1-GBg-tCJNl7Ros3IarkY-odjsUKB5Vi9) and unpack the .ZIP archive into a directory of your choice. Examples herein use **D:/** as a directory. Note that the repository only contains the [source code](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091.R) and [example vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091_EXAMPLES.R) .R files!
+2. Download the latest ClimMap Toolkit release from [this link](https://drive.google.com/file/d/1XAEcbGg-2_GwzQXVF2M05I_B7eZ_JghE/view?usp=sharing) and unpack the .ZIP archive into a directory of your choice. Examples herein use **D:/** as a directory. Note that the repository only contains the [source code](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091.R) and [example vignette](https://github.com/Deniz-Koseoglu/ClimMap_Toolkit/blob/master/ClimMap_Toolkit_v091_EXAMPLES.R) .R files!
 3. Open RStudio and create a new R script via **File -> New File -> R Script**. Alternatively, use the console.
 4. Source the ClimMap Toolkit functions  from the "ClimMap_Toolkit_v091.R" file located in the directory to which the .zip archive was unpacked. For example, assuming the "ClimMap_Toolkit_v091.R" file is located in D:/, the following command may be used:
 ```r
