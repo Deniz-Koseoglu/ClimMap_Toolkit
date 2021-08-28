@@ -72,7 +72,7 @@ opt_down=TRUE, down_mode="wb", dcores=detectCores(), max_retries=6, shared_folde
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **repository** |Which repository to download from? One of: "NSIDC", "NASA_Melt", "MODIS_A", "SeaWifs", "CEDA_MO" (HadUK-Grid), "CRU4" (CRU TS v4.03), "OC_CCI" (Ocean Colour CCI v4.0), or "TClim" (TerraClimate).|
+| **repository** |Which repository to download from? One of: "NSIDC", "MODIS_A", "SeaWifs", "CEDA_MO" (HadUK-Grid), "CRU4" (CRU TS v4.03), "OC_CCI" (Ocean Colour CCI v4.0), or "TClim" (TerraClimate).|
 | **hemisphere** |One of: "north" or "south"; only effective when `repository` is `"NSIDC"`.|
 | **frequency** |The frequency of data to download. One of: "daily", "monthly", "mon-20y" (if `repository` is "CEDA_MO", "CRU4"), "mon-30y" (if repository is "CEDA_MO", "CRU4", "TClim").|
 | **data_type** |Which variable to download data for. One of: "SIC", "SIE_polyline", "SIE_polygon", "SIE_median" (when `repository="NSIDC"`); "Chla", "SST", "NSST", "PAR", "iPAR", "PIC", "POC", "NFLH", "Zeu", "KD490", "BBP_GIOP", "BBP_s_GIOP", "Adg_GIOP", "Aph_GIOP", "BBP_GSM", "BBP_QAA" (`repository="MODIS_A"` or `"SeaWifs"`; SST data is not available from the latter); "Chla", "IOP", "RRS", "KD490" (`repository="OC_CCI"`); "groundfrost", "hurs", "psl", "pv", "rainfall", "sfcWind", "sun", "tas", "tasmax", "tasmin" (`repository="CEDA_MO"`); "aet", "def", "swe", "q", "soil", "PDSI", "pet", "ppt", "srad", "tmax", "tmin", "vap", "vpd", "ws" (`repository="TClim"`); "cld", "dtr", "frs", "pet", "pre", "tmn", "tmp", "tmx", "vap", "wet" (`repository="CRU4"`).|
@@ -112,7 +112,7 @@ calc_sum=FALSE, n_limit=0, mode="summary")
 #### Arguments
 | Argument | Description |
 | ------------- |-------------|
-| **repository** |Which repository to process files from? One of: "NSIDC", "MODIS_A", "SeaWifs", "SeaWifs_MODISA" (when using the shared folder; see `shared_folder` in `clim_download`), "CEDA_MO" (HadUK-Grid), "CRU4" (CRU TS v4.03), or "TClim" (TerraClimate).|
+| **repository** |Which repository to process files from? One of: "NSIDC", "NASA_Melt", "MODIS_A", "SeaWifs", "SeaWifs_MODISA" (when using the shared folder; see `shared_folder` in `clim_download`), "CEDA_MO" (HadUK-Grid), "CRU4" (CRU TS v4.03), or "TClim" (TerraClimate).|
 | **hemisphere** |One of: "north" or "south". Only relevant when `repository="NSIDC"`.|
 | **frequency** |One of: "daily" (when `repository` is "NSIDC", "MODIS_A", "SeaWifs", or "SeaWifs_MODISA"), "monthly", "mon-20y", "mon-30y" (when `repository` is "TClim" or "CEDA_MO").|
 | **data_type** |Character denoting the variable to be processed. Available options are analogous to those of the `data_type` argument for `clim_download`.|
